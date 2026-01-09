@@ -43,7 +43,6 @@
                         </div>
                     </div>
 
-                    <!-- ✅ Acciones en 2 cuadraditos -->
                     <div class="card-actions icons">
                         <a class="icon-btn icon-btn--primary" :href="whatsAppLink" target="_blank" rel="noopener"
                             aria-label="Escribir por WhatsApp" title="Escribir">
@@ -136,7 +135,6 @@
                         </div>
                     </div>
 
-                    <!-- ✅ mismo estilo de "campo" que los otros -->
                     <div class="card-mid">
                         <div class="info-row">
                             <span class="info-label">Correo</span>
@@ -161,21 +159,22 @@
             <!-- LOCATIONS -->
             <section class="locations" aria-label="Ubicaciones">
                 <header class="section-head">
+                    <!-- si querés dorado acá:
+          <h2 class="section-title title-accent--gold">Ubicaciones</h2>
+          -->
                     <h2 class="section-title">Ubicaciones</h2>
-                    <p class="section-subtitle">
-                        Dos puntos clave: donde se diseña y donde se fabrica.
-                    </p>
+                    <p class="section-subtitle">Dos puntos clave: donde se diseña y donde se fabrica.</p>
                 </header>
 
                 <div class="locations-grid">
-                    <!-- Caseros -->
+                    <!-- Castelar -->
                     <article class="location-card" :class="{ 'is-visible': isVisible }">
                         <div class="location-top">
-                            <h3 class="location-title">Caseros — Taller</h3>
+                            <h3 class="location-title">Castelar — Taller</h3>
                             <p class="location-desc">Acá nace cada mueble. Corte, armado y terminación.</p>
                         </div>
 
-                        <div class="map-shell" role="img" aria-label="Mapa zona Caseros">
+                        <div class="map-shell" role="img" aria-label="Mapa zona Castelar">
                             <iframe class="map" :src="MAPS.caseros" loading="lazy"
                                 referrerpolicy="no-referrer-when-downgrade"></iframe>
                             <div class="map-overlay" aria-hidden="true"></div>
@@ -188,14 +187,14 @@
                         </div>
                     </article>
 
-                    <!-- Villa del Parque -->
+                    <!-- Villa Devoto -->
                     <article class="location-card" :class="{ 'is-visible': isVisible }">
                         <div class="location-top">
-                            <h3 class="location-title">Villa del Parque — Oficina</h3>
+                            <h3 class="location-title">Villa Devoto — Oficina</h3>
                             <p class="location-desc">Reuniones, diseño y planificación del proyecto.</p>
                         </div>
 
-                        <div class="map-shell" role="img" aria-label="Mapa zona Villa del Parque">
+                        <div class="map-shell" role="img" aria-label="Mapa zona Villa Devoto">
                             <iframe class="map" :src="MAPS.villaDelParque" loading="lazy"
                                 referrerpolicy="no-referrer-when-downgrade"></iframe>
                             <div class="map-overlay" aria-hidden="true"></div>
@@ -208,6 +207,7 @@
                         </div>
                     </article>
                 </div>
+
             </section>
 
             <!-- TOAST -->
@@ -222,9 +222,6 @@
 <script setup>
 import { computed, onMounted, onBeforeUnmount, reactive, ref } from "vue";
 
-/**
- * ✅ Editá estos datos y listo
- */
 const CONTACT = reactive({
     whatsapp: "+54 11 5579-8761",
     instagram: "https://www.instagram.com/plegoamoblamientos/",
@@ -234,18 +231,16 @@ const CONTACT = reactive({
     email: "plegoamoblamientos@gmail.com",
 });
 
-/**
- * Mapas generalizados (zonas)
- */
 const MAPS = {
-    caseros: "https://www.google.com/maps?q=Caseros,+Buenos+Aires,+Argentina&output=embed",
-    villaDelParque: "https://www.google.com/maps?q=Villa+del+Parque,+CABA,+Argentina&output=embed",
+    caseros: "https://www.google.com/maps?q=Castelar,+Buenos+Aires,+Argentina&output=embed",
+    villaDelParque: "https://www.google.com/maps?q=Villa+Devoto,+CABA,+Argentina&output=embed",
 };
 
 const MAP_LINKS = {
-    caseros: "https://www.google.com/maps/search/?api=1&query=Caseros,+Buenos+Aires,+Argentina",
-    villaDelParque: "https://www.google.com/maps/search/?api=1&query=Villa+del+Parque,+CABA,+Argentina",
+    caseros: "https://www.google.com/maps/search/?api=1&query=Castelar,+Buenos+Aires,+Argentina",
+    villaDelParque: "https://www.google.com/maps/search/?api=1&query=Villa+Devoto,+CABA,+Argentina",
 };
+
 
 const toast = reactive({
     show: false,
@@ -257,13 +252,8 @@ const heroRef = ref(null);
 const isVisible = ref(false);
 let io;
 
-/**
- * WhatsApp: link con mensaje premium
- */
 const whatsAppLink = computed(() => {
-    const msg = encodeURIComponent(
-        "Hola Plego, quiero cotizar un mobiliario a medida. ¿Me cuentan cómo avanzamos?"
-    );
+    const msg = encodeURIComponent("Hola, Plego. Quería consultarles cuál es el proceso para cotizar mobiliario a medida y si existe la posibilidad de coordinar una reunión para evaluar el proyecto. Quedo atento, muchas gracias");
     const phone = CONTACT.whatsapp.replace(/[^\d]/g, "");
     return `https://wa.me/${phone}?text=${msg}`;
 });
@@ -280,7 +270,6 @@ async function copyToClipboard(value, okMessage = "Copiado") {
         await navigator.clipboard.writeText(value);
         showToast(okMessage);
     } catch (e) {
-        // fallback
         const ta = document.createElement("textarea");
         ta.value = value;
         ta.style.position = "fixed";
@@ -314,9 +303,16 @@ onBeforeUnmount(() => {
 <style scoped>
 /* =========================
    PLEGO CONTACT — UX/UI (FULL)
+   + TYPO SYSTEM (QUICKSAND)
    ========================= */
 
+/* ✅ Base tipográfica global de esta vista */
 .contacto-view {
+    font-family: 'Quicksand', sans-serif;
+    text-rendering: geometricPrecision;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
     position: relative;
     min-height: 100vh;
     overflow: hidden;
@@ -376,38 +372,151 @@ onBeforeUnmount(() => {
     transform: translateY(0);
 }
 
+/* ✅ Eyebrow — micro jerarquía premium */
 .eyebrow {
+    font-family: 'Quicksand', sans-serif;
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    font-size: 0.9rem;
-    letter-spacing: 0.12em;
+
+    font-size: 0.86rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
+
     color: rgba(205, 160, 80, 0.9);
 }
 
+/* ✅ Title (H1) — jerarquía principal */
 .title {
+    font-family: 'Quicksand', sans-serif;
+
     margin-top: 12px;
     font-size: clamp(2.1rem, 4.2vw, 3.2rem);
-    line-height: 1.05;
-    letter-spacing: -0.02em;
+    line-height: 1.06;
+    letter-spacing: -0.03em;
     font-weight: 800;
+
     color: rgba(255, 255, 255, 0.94);
 }
 
+/* ===== ACCENT MARRÓN (mobiliario) ===== */
 .title-accent {
-    background: #6F4E37;
+    --brown: #6F4E37;
+    --core: rgba(111, 78, 55, 0.38);
+    --soft: rgba(111, 78, 55, 0.22);
+    --warm: rgba(255, 220, 160, 0.18);
+
+    background: linear-gradient(90deg,
+            rgba(111, 78, 55, 0.95),
+            rgba(255, 220, 160, 0.92),
+            rgba(111, 78, 55, 0.95));
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
+
+    text-shadow:
+        0 0 6px var(--core),
+        0 0 14px var(--core),
+        0 0 28px var(--soft),
+        0 0 46px rgba(111, 78, 55, 0.18),
+        0 0 18px var(--warm);
+
+    filter: saturate(1.08) brightness(1.05);
+    position: relative;
+    white-space: nowrap;
+    animation: neonBrownPulse 3s ease-in-out infinite;
 }
 
+@keyframes neonBrownPulse {
+
+    0%,
+    100% {
+        text-shadow:
+            0 0 6px rgba(111, 78, 55, 0.34),
+            0 0 14px rgba(111, 78, 55, 0.30),
+            0 0 28px rgba(111, 78, 55, 0.22),
+            0 0 46px rgba(111, 78, 55, 0.16),
+            0 0 16px rgba(255, 220, 160, 0.14);
+        filter: saturate(1.06) brightness(1.03);
+    }
+
+    50% {
+        text-shadow:
+            0 0 8px rgba(111, 78, 55, 0.45),
+            0 0 18px rgba(111, 78, 55, 0.40),
+            0 0 36px rgba(111, 78, 55, 0.28),
+            0 0 62px rgba(111, 78, 55, 0.18),
+            0 0 22px rgba(255, 220, 160, 0.18);
+        filter: saturate(1.14) brightness(1.10);
+    }
+}
+
+/* ===== ACCENT DORADO (para usar donde quieras, sin pisar el marrón) ===== */
+.title-accent--gold {
+    --gold-core: rgba(205, 160, 80, 0.22);
+
+    background: linear-gradient(90deg,
+            rgba(205, 160, 80, 0.95),
+            rgba(255, 220, 160, 0.98),
+            rgba(205, 160, 80, 0.95));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+
+    text-shadow:
+        0 0 6px var(--gold-core),
+        0 0 14px var(--gold-core),
+        0 0 28px rgba(205, 160, 80, 0.30),
+        0 0 46px rgba(205, 160, 80, 0.22);
+
+    filter: saturate(1.1);
+    white-space: nowrap;
+    animation: neonGoldPulse 2.8s ease-in-out infinite;
+}
+
+@keyframes neonGoldPulse {
+
+    0%,
+    100% {
+        text-shadow:
+            0 0 6px rgba(205, 160, 80, 0.22),
+            0 0 14px rgba(205, 160, 80, 0.22),
+            0 0 28px rgba(205, 160, 80, 0.28),
+            0 0 46px rgba(205, 160, 80, 0.22);
+        filter: saturate(1.06);
+    }
+
+    50% {
+        text-shadow:
+            0 0 8px rgba(205, 160, 80, 0.22),
+            0 0 18px rgba(205, 160, 80, 0.22),
+            0 0 36px rgba(205, 160, 80, 0.34),
+            0 0 62px rgba(205, 160, 80, 0.22);
+        filter: saturate(1.16);
+    }
+}
+
+/* accesibilidad */
+@media (prefers-reduced-motion: reduce) {
+
+    .title-accent,
+    .title-accent--gold {
+        animation: none;
+    }
+}
+
+/* ✅ Subtitle (Hero) — lectura pro */
 .subtitle {
+    font-family: 'Quicksand', sans-serif;
     margin-top: 12px;
     max-width: 58ch;
+
     color: rgba(255, 255, 255, 0.70);
-    font-size: 1.05rem;
-    line-height: 1.55;
+    font-size: 1.06rem;
+    font-weight: 500;
+    line-height: 1.65;
+    letter-spacing: -0.01em;
 }
 
 .gold-line {
@@ -480,43 +589,86 @@ onBeforeUnmount(() => {
 }
 
 .icon-badge {
+    --brown: #6F4E37;
+    --core: rgba(111, 78, 55, 0.45);
+    --soft: rgba(111, 78, 55, 0.28);
+
     width: 46px;
     height: 46px;
     border-radius: 14px;
     display: grid;
     place-items: center;
-
-    color: rgba(205, 160, 80, 0.95);
-    background: rgba(205, 160, 80, 0.14);
-    border: 1px solid rgba(205, 160, 80, 0.30);
-    box-shadow: 0 10px 25px rgba(205, 160, 80, 0.12);
-
     flex: 0 0 auto;
+
+    position: relative;
+    overflow: visible;
+
+    color: #FFE3BF;
+
+    background:
+        radial-gradient(circle at 50% 40%,
+            rgba(255, 220, 160, 0.20),
+            var(--brown));
+
+    border: 1px solid rgba(255, 220, 160, 0.42);
+
+    box-shadow:
+        0 0 14px var(--core),
+        0 0 32px var(--soft),
+        0 0 64px rgba(111, 78, 55, 0.22),
+        0 16px 36px rgba(0, 0, 0, 0.65);
+
+    animation: neonPulse 2.6s ease-in-out infinite;
 }
 
-.icon-badge i {
-    font-size: 1.2rem;
+.icon-badge::after {
+    content: "";
+    position: absolute;
+    inset: -22px;
+    border-radius: 18px;
+    background: radial-gradient(circle, var(--core), transparent 65%);
+    filter: blur(22px);
+    pointer-events: none;
+    z-index: -1;
+}
+
+@keyframes neonPulse {
+
+    0%,
+    100% {
+        filter: brightness(1) saturate(1.05);
+    }
+
+    50% {
+        filter: brightness(1.25) saturate(1.35);
+    }
 }
 
 .card-head {
     min-width: 0;
 }
 
+/* ✅ Card title (H2) */
 .card-title {
-    font-size: 1.15rem;
-    font-weight: 800;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 1.12rem;
+    font-weight: 700;
     letter-spacing: -0.01em;
     margin: 0;
     color: rgba(255, 255, 255, 0.94);
 }
 
+/* ✅ Card desc */
 .card-desc {
+    font-family: 'Quicksand', sans-serif;
     margin: 6px 0 0;
     color: rgba(255, 255, 255, 0.70);
-    line-height: 1.5;
+    line-height: 1.55;
     font-size: 0.98rem;
+    font-weight: 500;
 }
 
+/* MID */
 .card-mid {
     position: relative;
     z-index: 1;
@@ -534,15 +686,21 @@ onBeforeUnmount(() => {
     border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
+/* ✅ info label/value jerarquizados */
 .info-label {
+    font-family: 'Quicksand', sans-serif;
     color: rgba(255, 255, 255, 0.62);
-    font-size: 0.92rem;
+    font-size: 0.88rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
 }
 
 .info-value {
+    font-family: 'Quicksand', sans-serif;
     color: rgba(255, 255, 255, 0.92);
     font-weight: 700;
     font-size: 0.95rem;
+    letter-spacing: 0.01em;
 }
 
 .info-value--truncate {
@@ -564,6 +722,10 @@ onBeforeUnmount(() => {
 }
 
 .icon-btn {
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+
     width: 46px;
     height: 46px;
     border-radius: 14px;
@@ -596,14 +758,81 @@ onBeforeUnmount(() => {
 }
 
 .icon-btn--primary {
-    background: linear-gradient(90deg, rgba(205, 160, 80, 1), rgba(255, 220, 160, 1));
-    color: #0c0c11;
-    border: 0;
-    box-shadow: 0 16px 40px rgba(205, 160, 80, 0.22);
+    --brown: #6F4E37;
+    --core: rgba(111, 78, 55, 0.45);
+    --soft: rgba(111, 78, 55, 0.28);
+
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+
+    width: 46px;
+    height: 46px;
+    border-radius: 14px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    position: relative;
+    overflow: visible;
+
+    color: #FFE3BF;
+
+    background:
+        radial-gradient(circle at 50% 38%,
+            rgba(255, 220, 160, 0.22),
+            var(--brown));
+
+    border: 1px solid rgba(255, 220, 160, 0.42);
+
+    box-shadow:
+        0 0 14px var(--core),
+        0 0 32px var(--soft),
+        0 0 64px rgba(111, 78, 55, 0.22),
+        0 16px 36px rgba(0, 0, 0, 0.65);
+
+    transition: transform .18s ease, box-shadow .22s ease;
+    animation: ctaPulse 2.8s ease-in-out infinite;
+}
+
+.icon-btn--primary::after {
+    content: "";
+    position: absolute;
+    inset: -22px;
+    border-radius: inherit;
+    background: radial-gradient(circle, var(--core), transparent 65%);
+    filter: blur(22px);
+    pointer-events: none;
+    z-index: -1;
+}
+
+@keyframes ctaPulse {
+
+    0%,
+    100% {
+        filter: brightness(1) saturate(1.05);
+    }
+
+    50% {
+        filter: brightness(1.35) saturate(1.55);
+    }
 }
 
 .icon-btn--primary:hover {
-    box-shadow: 0 20px 52px rgba(205, 160, 80, 0.30);
+    transform: translateY(-1px);
+    box-shadow:
+        0 0 18px rgba(111, 78, 55, 0.75),
+        0 0 44px rgba(111, 78, 55, 0.55),
+        0 0 86px rgba(255, 255, 255, 0.12),
+        0 20px 48px rgba(0, 0, 0, 0.75);
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .icon-btn--primary,
+    .icon-badge {
+        animation: none;
+    }
 }
 
 /* LOCATIONS */
@@ -615,44 +844,26 @@ onBeforeUnmount(() => {
     margin-bottom: 18px;
 }
 
+/* ✅ H2 Section title */
 .section-title {
-  position: relative;
-  display: inline-block;
-  padding-left: 14px; /* espacio para la barrita dorada */
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 800;
+    font-size: clamp(1.4rem, 2.2vw, 1.8rem);
+    letter-spacing: -0.02em;
+    margin: 0;
+    color: rgba(255, 255, 255, 0.94);
 }
 
-.section-title::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 52%;
-  transform: translateY(-50%);
-  width: 6px;
-  height: 24px;
-  border-radius: 10px;
-  background: linear-gradient(180deg, rgba(205,160,80,1), rgba(255,220,160,1));
-  box-shadow: 0 0 18px rgba(205,160,80,0.35);
-}
-
-.section-title::after {
-  content: "";
-  position: absolute;
-  left: 10px;
-  bottom: -6px;
-  width: 120px;
-  height: 14px;
-  background: radial-gradient(circle at 30% 60%, rgba(205,160,80,0.22), transparent 70%);
-  filter: blur(6px);
-  opacity: 0.9;
-  pointer-events: none;
-}
-
-
-/* subtítulo con acento dorado en el “aire” */
+/* ✅ Section subtitle */
 .section-subtitle {
-  position: relative;
-  padding-left: 14px;
-  border-left: 1px solid rgba(205,160,80,0.22);
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 500;
+    font-size: 1rem;
+    line-height: 1.6;
+
+    position: relative;
+    padding-left: 14px;
+    border-left: 1px solid rgba(205, 160, 80, 0.22);
 }
 
 .locations-grid {
@@ -689,17 +900,24 @@ onBeforeUnmount(() => {
     box-shadow: 0 22px 75px rgba(0, 0, 0, 0.55);
 }
 
+/* ✅ H3 location title */
 .location-title {
+    font-family: 'Quicksand', sans-serif;
     margin: 0;
     font-size: 1.15rem;
-    font-weight: 900;
+    font-weight: 800;
+    letter-spacing: -0.02em;
     color: rgba(255, 255, 255, 0.94);
 }
 
+/* ✅ Location desc */
 .location-desc {
+    font-family: 'Quicksand', sans-serif;
     margin: 8px 0 0;
     color: rgba(255, 255, 255, 0.68);
-    line-height: 1.5;
+    font-weight: 500;
+    font-size: 0.98rem;
+    line-height: 1.55;
 }
 
 .map-shell {
@@ -729,81 +947,75 @@ onBeforeUnmount(() => {
     pointer-events: none;
 }
 
-/* =========================
-   CTA "Ver en Maps" — Premium integrado (NO sticker)
-   ========================= */
-
+/* CTA "Ver en Maps" */
 .location-actions {
-  margin-top: 14px;
-  display: flex;
-  justify-content: flex-start;
+    margin-top: 14px;
+    display: flex;
+    justify-content: flex-start;
 }
 
 .location-actions .btn {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.02em;
 
-  padding: 10px 16px;
-  border-radius: 14px;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
 
-  font-weight: 800;
-  letter-spacing: 0.02em;
-  text-transform: none; /* ✅ fuera el grito */
-  font-size: 0.95rem;
+    padding: 10px 16px;
+    border-radius: 14px;
 
-  color: rgba(255, 255, 255, 0.92) !important;
+    text-transform: none;
+    font-size: 0.95rem;
 
-  /* ✅ glass con borde dorado suave */
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(205, 160, 80, 0.35);
-  backdrop-filter: blur(10px);
+    color: rgba(255, 255, 255, 0.92) !important;
 
-  box-shadow:
-    0 10px 28px rgba(0, 0, 0, 0.35),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(205, 160, 80, 0.35);
+    backdrop-filter: blur(10px);
 
-  transition: transform 180ms ease, border-color 220ms ease, box-shadow 220ms ease, background 220ms ease;
+    box-shadow:
+        0 10px 28px rgba(0, 0, 0, 0.35),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+
+    transition: transform 180ms ease, border-color 220ms ease, box-shadow 220ms ease, background 220ms ease;
 }
 
-/* Glow finito, no mancha */
 .location-actions .btn::before {
-  content: "";
-  position: absolute;
-  inset: -1px;
-  border-radius: inherit;
-  background: radial-gradient(420px 200px at 20% 30%, rgba(205, 160, 80, 0.18), transparent 62%);
-  opacity: 0;
-  transition: opacity 220ms ease;
-  pointer-events: none;
+    content: "";
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    background: radial-gradient(420px 200px at 20% 30%, rgba(205, 160, 80, 0.18), transparent 62%);
+    opacity: 0;
+    transition: opacity 220ms ease;
+    pointer-events: none;
 }
 
 .location-actions .btn:hover::before {
-  opacity: 1;
+    opacity: 1;
 }
 
 .location-actions .btn:hover {
-  transform: translateY(-1px);
-  background: rgba(255, 255, 255, 0.075);
-  border-color: rgba(205, 160, 80, 0.55);
-  box-shadow:
-    0 16px 40px rgba(0, 0, 0, 0.45),
-    0 0 0 1px rgba(205, 160, 80, 0.15);
+    transform: translateY(-1px);
+    background: rgba(255, 255, 255, 0.075);
+    border-color: rgba(205, 160, 80, 0.55);
+    box-shadow:
+        0 16px 40px rgba(0, 0, 0, 0.45),
+        0 0 0 1px rgba(205, 160, 80, 0.15);
 }
 
 .location-actions .btn:active {
-  transform: translateY(0px);
+    transform: translateY(0px);
 }
 
-/* Si tu botón tiene class btn-ghost, neutralizamos lo anterior */
 .location-actions .btn.btn-ghost {
-  background: rgba(255, 255, 255, 0.06) !important;
-  border: 1px solid rgba(205, 160, 80, 0.35) !important;
-  color: rgba(255, 255, 255, 0.92) !important;
+    background: rgba(255, 255, 255, 0.06) !important;
+    border: 1px solid rgba(205, 160, 80, 0.35) !important;
+    color: rgba(255, 255, 255, 0.92) !important;
 }
-
-
 
 /* TOAST */
 .toast {
@@ -843,6 +1055,7 @@ onBeforeUnmount(() => {
 }
 
 .toast-text {
+    font-family: 'Quicksand', sans-serif;
     color: rgba(255, 255, 255, 0.9);
     font-weight: 800;
     letter-spacing: -0.01em;
@@ -898,4 +1111,5 @@ onBeforeUnmount(() => {
         justify-content: flex-start;
     }
 }
+
 </style>

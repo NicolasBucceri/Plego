@@ -30,9 +30,7 @@
     </div>
 
     <!-- ============ BANNER INFERIOR ============ -->
-    <div class="banner-wrapper">
-      <img src="@/assets/Img/BannerTrabajamos.jpeg" alt="Banner Plego" class="banner-img" />
-    </div>
+    <BannerPanoramico :src="bannerTrabajamos" alt="Banner Plego" ratio="16/4" :maxHeight="420" />
 
   </section>
 </template>
@@ -40,22 +38,25 @@
 <script setup>
 import { ref, onMounted, onBeforeUnmount } from 'vue'
 
+import BannerPanoramico from "@/components/BannerPanoramico.vue";
+import bannerTrabajamos from "@/assets/Img/BannerTrabajamos.jpeg";
+
 /* PASOS DEL PROCESO */
 const pasos = [
   {
     titulo: 'Contacto',
     texto:
-      'Para realizar consultas o pedir cotizaciones podés escribirnos al WhatsApp o mandarnos un mail a: plegoamoblamientos@gmail.com'
+      'Para consultas o cotizaciones podés escribirnos por WhatsApp o enviarnos un mail a plegoamoblamientos@gmail.com y te responderemos a la brevedad'
   },
   {
     titulo: 'Información',
     texto:
-      'Comenzamos con una reunión donde escuchamos tus ideas y necesidades. A partir de ese intercambio desarrollamos una propuesta inicial adaptada a tu espacio, que vamos ajustando en conjunto hasta definir el diseño ideal.'
+      'Comenzamos con una reunión para conocer tus ideas y necesidades. Luego desarrollamos una propuesta adaptada a tu espacio, que ajustamos en conjunto hasta definir el diseño'
   },
   {
     titulo: 'Anteproyecto',
     texto:
-      'El anteproyecto se presenta con planos y definiciones técnicas que permiten evaluar distribución, medidas y materiales. Esta etapa es clave para la elaboración del presupuesto y, una vez aprobado, avanzar con la fabricación del mobiliario.'
+      'El anteproyecto se presenta con planos y definiciones técnicas para evaluar distribución, medidas y materiales, base clave para presupuestar y avanzar con la fabricación.'
   },
   {
     titulo: 'Entrega',
@@ -184,7 +185,7 @@ onBeforeUnmount(() => {
 }
 
 .work-title {
-  font-family: 'Federo', sans-serif !important;
+  font-family: 'Quicksand', sans-serif;
   font-size: clamp(2.4rem, 4vw, 3.2rem);
   letter-spacing: 0.5px;
   font-weight: 400;

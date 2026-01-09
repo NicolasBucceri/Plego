@@ -51,40 +51,7 @@
 
       <!-- ============ CUERPO LARGO ============ -->
       <div class="mueble-body">
-        <!-- SECCIÓN: ACABADO GLOBAL -->
-        <section class="mueble-section mueble-section--global">
-          <div class="mueble-section-header">
-            <h2 class="mueble-section-title">Acabado en conjunto</h2>
-            <p class="mueble-section-subtitle">
-              Cómo se integra el acabado {{ dataTextura.nombre }} en el ambiente completo.
-            </p>
-          </div>
-
-          <div class="mueble-grid-cards">
-            <article class="mueble-card">
-              <h3 class="mueble-card-title">Sensación general</h3>
-              <p class="mueble-card-text">
-                {{ dataTextura.textoSensacion }}
-              </p>
-            </article>
-
-            <article class="mueble-card">
-              <h3 class="mueble-card-title">Combinaciones sugeridas</h3>
-              <p class="mueble-card-text">
-                {{ dataTextura.textoCombinacion }}
-              </p>
-            </article>
-
-            <article class="mueble-card">
-              <h3 class="mueble-card-title">Ideal para</h3>
-              <ul class="mueble-bullets">
-                <li v-for="(item, i) in dataTextura.idealPara" :key="i">
-                  {{ item }}
-                </li>
-              </ul>
-            </article>
-          </div>
-        </section>
+        <!-- ✅ SE SACÓ LA SECCIÓN "ACABADO EN CONJUNTO" -->
 
         <!-- ========== SECCIÓN: GALERÍA + VIDEOS POR AMBIENTE ========== -->
         <section
@@ -142,10 +109,7 @@
               </div>
 
               <!-- VIDEOS DEL AMBIENTE ACTUAL -->
-              <div
-                v-if="videosAmbienteActual.length"
-                class="mueble-videos-row"
-              >
+              <div v-if="videosAmbienteActual.length" class="mueble-videos-row">
                 <button
                   v-for="video in videosAmbienteActual"
                   :key="video.id"
@@ -174,182 +138,167 @@
 <script setup>
 import { computed, ref, watch } from 'vue'
 
-// ================== IMPORTS DE IMÁGENES ==================
+// ================== IMPORTS DE IMÁGENES (fallback/hero) ==================
 import fondoRoble from '@/assets/Img/Texturas/CocinaRoble.png'
 import fondoParaiso from '@/assets/Img/Texturas/CocinaParaiso.png'
 import fondoNogal from '@/assets/Img/Texturas/CocinaRoble.png' // reemplazalo cuando tengas foto real
 
 // ================== PROPS ==================
 const props = defineProps({
-  textura: {
-    type: String,
-    required: true
-  }
+  textura: { type: String, required: true } // 'roble' | 'paraiso' | 'nogal'
 })
 
 const emit = defineEmits(['ver-video'])
 
-// ================== FONDOS ==================
+// ================== FONDOS (fallback) ==================
 const fondos = {
   roble: fondoRoble,
   paraiso: fondoParaiso,
   nogal: fondoNogal
 }
 
-// ================== DATA POR TEXTURA ==================
+// ================== DATA POR TEXTURA (TU CONTENIDO) ==================
 const dataPorTextura = {
   roble: {
     nombre: 'Roble',
-    descripcion:
-      'Un acabado cálido y contemporáneo, ideal para cocinas y livings donde la textura acompaña sin competir.',
+    descripcion: 'Un acabado cálido y contemporáneo...',
     mood: 'Cálido',
     uso: 'Cocinas & livings',
     iluminacion: 'Luz natural media/alta',
-    resumenCorto:
-      'Equilibrio entre calidez y actualidad. Funciona muy bien acompañado de paredes claras y luz uniforme.',
-    textoSensacion:
-      'El roble aporta una sensación de hogar y modernidad al mismo tiempo, sin volverse pesado.',
-    textoCombinacion:
-      'Combina perfecto con grises suaves, blancos cálidos y detalles en negro mate.',
-    idealPara: [
-      'Cocinas integradas',
-      'Muebles de guardado',
-      'Islas y barras iluminadas'
-    ]
+    resumenCorto: 'Equilibrio entre calidez y actualidad...',
+    textoSensacion: '...',
+    textoCombinacion: '...',
+    idealPara: ['Cocinas integradas', 'Muebles de guardado', 'Islas y barras iluminadas']
   },
-
   paraiso: {
     nombre: 'Paraíso',
-    descripcion:
-      'Una veta sutil y luminosa, pensada para ampliar visualmente y aportar ligereza al espacio.',
+    descripcion: 'Una veta sutil y luminosa...',
     mood: 'Suave & luminoso',
     uso: 'Cocinas pequeñas y estudios',
     iluminacion: 'Luz natural baja/media',
-    resumenCorto:
-      'Ideal para sumar luz en ambientes reducidos y generar amplitud.',
-    textoSensacion:
-      'Se percibe liviano y relajado. No cansa con el tiempo.',
-    textoCombinacion:
-      'Funciona con paredes claras, tonos arena y detalles en aluminio.',
-    idealPara: [
-      'Cocinas compactas',
-      'Estudios',
-      'Muebles discretos y livianos'
-    ]
+    resumenCorto: 'Ideal para sumar luz...',
+    textoSensacion: '...',
+    textoCombinacion: '...',
+    idealPara: ['Cocinas compactas', 'Estudios', 'Muebles discretos y livianos']
   },
-
   nogal: {
     nombre: 'Nogal',
-    descripcion:
-      'Profundo y sofisticado. Aporta contraste fuerte y mucha presencia al mobiliario.',
+    descripcion: 'Profundo y sofisticado...',
     mood: 'Profundo & elegante',
     uso: 'Cocinas oscuras y barras',
     iluminacion: 'Luz puntual o indirecta',
-    resumenCorto:
-      'Acabado con mucha personalidad, ideal cuando el mueble es protagonista.',
-    textoSensacion:
-      'Genera un clima íntimo, envolvente y sofisticado.',
-    textoCombinacion:
-      'Se luce con microcemento, paredes claras y herrajes en negro o cobre.',
-    idealPara: [
-      'Barras',
-      'Vestidores premium',
-      'Cocinas con iluminación de diseño'
-    ]
+    resumenCorto: 'Acabado con mucha personalidad...',
+    textoSensacion: '...',
+    textoCombinacion: '...',
+    idealPara: ['Barras', 'Vestidores premium', 'Cocinas con iluminación de diseño']
   }
 }
 
-// ================== AMBIENTES POR TEXTURA ==================
-// Cada textura tiene SIEMPRE los mismos 3 ambientes:
-// Dormitorios / Vestidores / Vanitory
-// En cada uno podés cargar muchas imágenes y muchos videos.
-const ambientesPorTextura = {
-  roble: {
-    dormitorio: {
-      label: 'Dormitorios',
-      imagenes: [fondoRoble],
-      videos: []
-    },
-    vestidor: {
-      label: 'Vestidores',
-      imagenes: [fondoRoble],
-      videos: []
-    },
-    vanitory: {
-      label: 'Vanitory',
-      imagenes: [fondoRoble],
-      videos: []
-    }
-  },
-  paraiso: {
-    dormitorio: {
-      label: 'Dormitorios',
-      imagenes: [fondoParaiso],
-      videos: []
-    },
-    vestidor: {
-      label: 'Vestidores',
-      imagenes: [fondoParaiso],
-      videos: []
-    },
-    vanitory: {
-      label: 'Vanitory',
-      imagenes: [fondoParaiso],
-      videos: []
-    }
-  },
-  nogal: {
-    dormitorio: {
-      label: 'Dormitorios',
-      imagenes: [fondoNogal],
-      videos: []
-    },
-    vestidor: {
-      label: 'Vestidores',
-      imagenes: [fondoNogal],
-      videos: []
-    },
-    vanitory: {
-      label: 'Vanitory',
-      imagenes: [fondoNogal],
-      videos: []
-    }
+// ================== GALERÍA AUTO (TU ESTRUCTURA REAL) ==================
+// Estructura actual:
+// /src/assets/Img/Roble/cocinas/Img1.jpeg
+// /src/assets/Img/Paraiso/placares/Img7.jpg
+// /src/assets/Img/Nogal/vanitory/Img3.png
+//
+// ✅ soporta Img/img + .png/.jpg/.jpeg
+const rawImgs = import.meta.glob(
+  '@/assets/Img/*/*/[iI]mg*.{png,jpg,jpeg,PNG,JPG,JPEG}',
+  { eager: true, import: 'default' }
+)
+
+const getIndexFromFilename = (path) => {
+  // saca número de Img7 / img7
+  const m = path.match(/img(\d+)\.(png|jpe?g)$/i)
+  return m ? Number(m[1]) : 9999
+}
+
+// gallery[textura][ambiente] = [url...]
+const buildGalleryMap = (modules) => {
+  const gallery = {}
+
+  for (const path in modules) {
+    // path típico: /src/assets/Img/Roble/cocinas/Img7.jpeg
+    const parts = path.split('/')
+
+    const texturaFolder = (parts[parts.length - 3] || '').toLowerCase()   // roble | paraiso | nogal
+    const ambiente = (parts[parts.length - 2] || '').toLowerCase()        // cocinas | placares | vanitory
+    const url = modules[path]
+
+    // filtramos solo estas 3 texturas para evitar ruido (Nosotros, Texturas, etc.)
+    if (!['roble', 'paraiso', 'nogal'].includes(texturaFolder)) continue
+
+    if (!gallery[texturaFolder]) gallery[texturaFolder] = {}
+    if (!gallery[texturaFolder][ambiente]) gallery[texturaFolder][ambiente] = []
+
+    gallery[texturaFolder][ambiente].push({ url, order: getIndexFromFilename(path) })
   }
+
+  // ordenar Img1..Img7
+  Object.keys(gallery).forEach((t) => {
+    Object.keys(gallery[t]).forEach((a) => {
+      gallery[t][a] = gallery[t][a]
+        .sort((x, y) => x.order - y.order)
+        .map((x) => x.url)
+    })
+  })
+
+  return gallery
+}
+
+const galleryMap = buildGalleryMap(rawImgs)
+
+
+// ================== LABELS (TABS) ==================
+// ⚠️ tienen que coincidir con los nombres de tus carpetas
+const labelsAmbientes = {
+  placares: 'Placares',
+  cocinas: 'Cocinas',
+  vanitory: 'Vanitory'
 }
 
 // ================== COMPUTEDS PRINCIPALES ==================
-const dataTextura = computed(
-  () => dataPorTextura[props.textura] || dataPorTextura.roble
-)
+const texturaKey = computed(() => (props.textura || 'roble').toLowerCase())
 
-const fondoActual = computed(
-  () => fondos[props.textura] || fondoRoble
-)
+const dataTextura = computed(() => dataPorTextura[texturaKey.value] || dataPorTextura.roble)
+const fondoActual = computed(() => fondos[texturaKey.value] || fondoRoble)
 
-const mapaAmbientes = computed(
-  () => ambientesPorTextura[props.textura] || {}
-)
+// mapaAmbientes ahora sale de galleryMap[textura][ambiente]
+const mapaAmbientes = computed(() => {
+  const t = texturaKey.value
+  const data = galleryMap[t] || {}
 
+  const result = {}
+  Object.keys(labelsAmbientes).forEach((key) => {
+    result[key] = {
+      label: labelsAmbientes[key],
+      imagenes: data[key] || [],
+      videos: []
+    }
+  })
+
+  return result
+})
+
+// Solo tabs con imágenes (UX prolijo)
 const listaAmbientes = computed(() =>
-  Object.entries(mapaAmbientes.value).map(([key, data]) => ({
-    key,
-    label: data.label
-  }))
+  Object.entries(mapaAmbientes.value)
+    .filter(([_, v]) => v.imagenes?.length)
+    .map(([key, data]) => ({ key, label: data.label }))
 )
 
-// Ambiente activo
+// ================== AMBIENTE ACTIVO ==================
 const ambienteActivo = ref('')
 
-// Seteo inicial del ambiente activo
 watch(
   listaAmbientes,
   (lista) => {
-    if (lista.length) {
-      if (!lista.some((a) => a.key === ambienteActivo.value)) {
-        ambienteActivo.value = lista[0].key
-      }
-    } else {
+    // si el actual no existe en la nueva textura, cae al primero
+    if (!lista.length) {
       ambienteActivo.value = ''
+      return
+    }
+    if (!lista.some((a) => a.key === ambienteActivo.value)) {
+      ambienteActivo.value = lista[0].key
     }
   },
   { immediate: true }
@@ -360,46 +309,40 @@ const ambienteActivoLabel = computed(() => {
   return amb?.label || ''
 })
 
-// Imágenes del ambiente actual
 const imagenesAmbienteActual = computed(() => {
   const amb = mapaAmbientes.value[ambienteActivo.value]
-  if (amb && amb.imagenes && amb.imagenes.length) return amb.imagenes
-  return [fondoActual.value]
+  return amb?.imagenes?.length ? amb.imagenes : [fondoActual.value]
 })
 
-// Videos del ambiente actual
 const videosAmbienteActual = computed(() => {
   const amb = mapaAmbientes.value[ambienteActivo.value]
-  if (amb && amb.videos && amb.videos.length) return amb.videos
-  return []
+  return amb?.videos?.length ? amb.videos : []
 })
 
-// Imagen que se ve en el HERO (primer imagen del ambiente activo)
-const imagenHero = computed(() => {
-  const amb = mapaAmbientes.value[ambienteActivo.value]
-  if (amb && amb.imagenes && amb.imagenes.length) {
-    return amb.imagenes[0]
-  }
-  return fondoActual.value
-})
+const imagenHero = computed(() => fondoActual.value)
 
+
+// ================== ACTIONS ==================
 const cambiarAmbiente = (key) => {
   ambienteActivo.value = key
 }
 
 const handleVerVideo = (video) => {
-  emit('ver-video', { textura: props.textura, video })
+  emit('ver-video', { textura: texturaKey.value, video })
 }
 </script>
 
+
+
 <style scoped>
 .mueble-view {
+  font-family: 'Quicksand', sans-serif;
   position: relative;
   width: 100%;
   min-height: 100vh;
   background-color: #111;
   overflow: hidden;
-  padding: 4.5rem 1.5rem 6rem;
+  padding: clamp(3.5rem, 5vw, 5.5rem) clamp(1.2rem, 3vw, 2.4rem) clamp(5rem, 6vw, 7rem);
   display: flex;
   align-items: flex-start;
 }
@@ -412,7 +355,7 @@ const handleVerVideo = (video) => {
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: clamp(2rem, 3vw, 3rem);
 }
 
 /* Header */
@@ -428,6 +371,7 @@ const handleVerVideo = (video) => {
   color: #e2d0b7;
   opacity: 0.95;
   margin-bottom: 0.75rem;
+  font-weight: 700;
 }
 
 .mueble-title {
@@ -435,18 +379,18 @@ const handleVerVideo = (video) => {
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: #ffffff;
-  font-weight: 400;
+  font-weight: 700;
   margin-bottom: 0.75rem;
 }
 
 .mueble-title-highlight {
   display: inline-block;
   margin-left: 0.35rem;
-  padding: 0.1rem 0.5rem;
+  padding: 0.5rem 0.8rem;
   border-radius: 999px;
   background: rgba(244, 200, 121, 0.16);
   border: 1px solid rgba(244, 200, 121, 0.6);
-  font-weight: 500;
+  font-weight: 800;
 }
 
 .mueble-subtitle {
@@ -454,6 +398,7 @@ const handleVerVideo = (video) => {
   font-size: 0.98rem;
   line-height: 1.7;
   max-width: 540px;
+  font-weight: 500;
 }
 
 .mueble-tags {
@@ -472,6 +417,7 @@ const handleVerVideo = (video) => {
   background: rgba(0, 0, 0, 0.6);
   border: 1px solid rgba(244, 200, 121, 0.65);
   color: #ffeecb;
+  font-weight: 800;
 }
 
 .mueble-tag--outline {
@@ -523,7 +469,7 @@ const handleVerVideo = (video) => {
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: #ffffff;
-  font-weight: 400;
+  font-weight: 700;
 }
 
 .mueble-preview-panel {
@@ -543,14 +489,15 @@ const handleVerVideo = (video) => {
   font-size: 0.9rem;
   color: #fdf4e4;
   line-height: 1.6;
+  font-weight: 500;
 }
 
 /* CUERPO LARGO */
 .mueble-body {
   display: flex;
   flex-direction: column;
-  gap: 3.2rem;
-  margin-top: 2.4rem;
+  gap: clamp(2.6rem, 4vw, 3.8rem);
+  margin-top: clamp(1.8rem, 3vw, 2.8rem);
 }
 
 /* Secciones genéricas */
@@ -563,6 +510,7 @@ const handleVerVideo = (video) => {
   border: 1px solid rgba(255, 255, 255, 0.08);
   box-shadow: 0 18px 50px rgba(0, 0, 0, 0.7);
   backdrop-filter: blur(10px);
+  padding: clamp(1.8rem, 3vw, 2.6rem) clamp(1.2rem, 3vw, 2.2rem);
 }
 
 .mueble-section-header {
@@ -575,61 +523,14 @@ const handleVerVideo = (video) => {
   letter-spacing: 0.18em;
   color: #fdf1dd;
   margin-bottom: 0.45rem;
+  font-weight: 800;
 }
 
 .mueble-section-subtitle {
   font-size: 0.9rem;
   color: rgba(244, 232, 214, 0.88);
-  max-width: 520px;
-}
-
-/* Cards global */
-.mueble-grid-cards {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1.5rem;
-}
-
-.mueble-card {
-  padding: 1.2rem 1.1rem;
-  border-radius: 14px;
-  background: rgba(5, 5, 5, 0.72);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-}
-
-.mueble-card-title {
-  font-size: 0.9rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: #f7ebd8;
-  margin-bottom: 0.45rem;
-}
-
-.mueble-card-text {
-  font-size: 0.88rem;
-  color: rgba(247, 235, 216, 0.94);
-  line-height: 1.6;
-}
-
-.mueble-bullets {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.mueble-bullets li {
-  position: relative;
-  padding-left: 1.1rem;
-  margin-bottom: 0.35rem;
-  font-size: 0.86rem;
-  color: rgba(248, 237, 219, 0.94);
-}
-
-.mueble-bullets li::before {
-  content: '•';
-  position: absolute;
-  left: 0;
-  top: 0;
+  max-width: 720px;
+  font-weight: 500;
 }
 
 /* Tabs tipo Bootstrap pero con tu look */
@@ -647,6 +548,7 @@ const handleVerVideo = (video) => {
   text-transform: uppercase;
   padding: 0.55rem 1.4rem;
   background: transparent;
+  font-weight: 800;
 }
 
 .mueble-tabs .nav-link:hover {
@@ -674,6 +576,7 @@ const handleVerVideo = (video) => {
   aspect-ratio: 4 / 3;
   overflow: hidden;
   box-shadow: 0 14px 34px rgba(0, 0, 0, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.10);
 }
 
 .mueble-gallery-overlay {
@@ -697,6 +600,7 @@ const handleVerVideo = (video) => {
   background: rgba(0, 0, 0, 0.7);
   border: 1px solid rgba(255, 255, 255, 0.45);
   color: #fef5e4;
+  font-weight: 800;
 }
 
 /* Videos */
@@ -724,6 +628,7 @@ const handleVerVideo = (video) => {
   position: relative;
   overflow: hidden;
   box-shadow: 0 14px 32px rgba(0, 0, 0, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.10);
 }
 
 .mueble-video-icon {
@@ -751,6 +656,7 @@ const handleVerVideo = (video) => {
   margin-top: 0.35rem;
   font-size: 0.8rem;
   color: #f6e9d6;
+  font-weight: 700;
 }
 
 /* Responsive */
@@ -759,7 +665,6 @@ const handleVerVideo = (video) => {
     padding: 3.5rem 1.25rem 4.5rem;
   }
 
-  .mueble-grid-cards,
   .mueble-gallery-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -779,7 +684,6 @@ const handleVerVideo = (video) => {
     margin-right: 0.9rem;
   }
 
-  .mueble-grid-cards,
   .mueble-gallery-grid {
     grid-template-columns: minmax(0, 1fr);
   }

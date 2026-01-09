@@ -21,15 +21,22 @@ import { computed } from "vue"
 
 const whatsappNumber = "5491155798761"
 const instagramUser = "nicolasbucceri.dev"
-const waMessage = "Hola, vengo desde la web y quiero hacer una consulta."
+
+const waMessage =
+  `Hola, Plego.\n` +
+  `Quería consultarles cuál es el proceso para cotizar mobiliario a medida ` +
+  `y si existe la posibilidad de coordinar una reunión para evaluar el proyecto.\n` +
+  `Quedo atento, muchas gracias`
 
 const waHref = computed(() => {
-    const text = encodeURIComponent(waMessage)
-    return `https://wa.me/${whatsappNumber}?text=${text}`
+  const text = encodeURIComponent(waMessage)
+  return `https://wa.me/${whatsappNumber}?text=${text}`
 })
 
-const igHref = computed(() => `https://www.instagram.com/plegoamoblamientos/?hl=es-la`
+const igHref = computed(() =>
+  `https://www.instagram.com/plegoamoblamientos/?hl=es-la`
 )
+
 </script>
 
 <style scoped>

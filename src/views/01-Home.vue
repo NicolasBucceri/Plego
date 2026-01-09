@@ -1,21 +1,21 @@
 <template>
-  <section id="hero" class="full-section">
+  <section id="hero">
     <Hero />
   </section>
 
-  <section id="soluciones" class="full-section">
+  <section id="soluciones">
     <SeccionSoluciones :slides="slidesSoluciones" />
   </section>
 
-  <section id="texturas" class="full-section">
+  <section id="texturas">
     <TexturasSection />
   </section>
 
-  <section id="nosotros" class="full-section">
+  <section id="nosotros">
     <NosotrosSection />
   </section>
 
-  <section id="comoTrabajamos" class="full-section">
+  <section id="comoTrabajamos">
     <ComoTrabajamos />
   </section>
 
@@ -31,7 +31,7 @@
     <Marcas />
   </section>
 
-  <section id="contacto" class="full-section">
+  <section id="contacto">
     <ContactoSection />
   </section>
 </template>
@@ -47,15 +47,21 @@ import ProyectosCarrusel from '@/views/08-Proyectos.vue'
 import Marcas from '@/views/09-Marcas.vue'
 
 
-import banner4 from '@/assets/Img/Banner4.png'
-import banner5 from '@/assets/Img/Banner5.png'
-import banner6 from '@/assets/Img/Banner6.png'
+import banner1 from "@/assets/Img/BannerHero/Banner1Inicio.png";
+import banner2 from "@/assets/Img/BannerHero/Banner2Inicio.png";
+import banner3 from "@/assets/Img/BannerHero/Banner3Inicio.png";
+import banner4 from "@/assets/Img/BannerHero/Banner4Inicio.png";
+import banner5 from "@/assets/Img/BannerHero/Banner5Inicio.png";
+
+import solBanner4 from "@/assets/Img/BannerSolucionesMedidas/Banner4.png";
+import solBanner5 from "@/assets/Img/BannerSolucionesMedidas/Banner5.png";
+import solBanner6 from "@/assets/Img/BannerSolucionesMedidas/Banner6.png";
 
 const slidesSoluciones = [
-  { src: banner4, alt: 'Cocina 1' },
-  { src: banner5, alt: 'Cocina 2' },
-  { src: banner6, alt: 'Cocina 3' }
-]
+  { src: solBanner4, alt: "Cocina moderna 1" },
+  { src: solBanner5, alt: "Cocina moderna 2" },
+  { src: solBanner6, alt: "Cocina moderna 3" },
+];
 </script>
 
 <style scoped>

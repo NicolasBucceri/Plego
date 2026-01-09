@@ -1,9 +1,5 @@
 <template>
-  <section
-    class="brands-section"
-    ref="sectionRef"
-    :class="{ 'is-visible': isVisible }"
-  >
+  <section class="brands-section" ref="sectionRef" :class="{ 'is-visible': isVisible }">
     <div class="brands-container">
 
       <!-- TEXTO IZQUIERDA -->
@@ -25,12 +21,7 @@
 
       <!-- LOGOS DERECHA -->
       <div class="brands-logos">
-        <div
-          v-for="(brand, i) in marcas"
-          :key="i"
-          class="brand-item"
-          :class="{ 'brand-boost': brand.boost }"
-        >
+        <div v-for="(brand, i) in marcas" :key="i" class="brand-item" :class="{ 'brand-boost': brand.boost }">
           <img :src="brand.logo" :alt="brand.nombre" />
         </div>
       </div>
@@ -121,7 +112,7 @@ onBeforeUnmount(() => {
 }
 
 .brands-title {
-  font-family: "Federo", sans-serif;
+  font-family: 'Quicksand', sans-serif;
   margin-top: 1.1rem;
   font-size: 2.5rem;
   font-weight: 300;
@@ -143,12 +134,10 @@ onBeforeUnmount(() => {
   width: 1px;
   height: 100%;
   min-height: 180px;
-  background: linear-gradient(
-    to bottom,
-    rgba(255, 255, 255, 0) 0%,
-    rgba(255, 255, 255, 0.55) 50%,
-    rgba(255, 255, 255, 0) 100%
-  );
+  background: linear-gradient(to bottom,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.55) 50%,
+      rgba(255, 255, 255, 0) 100%);
 
   opacity: 0;
   transform: translateY(10px);
@@ -215,14 +204,12 @@ onBeforeUnmount(() => {
 ========================================================= */
 .brand-item.brand-boost img {
   filter:
-    drop-shadow(0 0 1px rgba(255, 255, 255, 0.95))
-    drop-shadow(0 0 10px rgba(255, 255, 255, 0.18));
+    drop-shadow(0 0 1px rgba(255, 255, 255, 0.95)) drop-shadow(0 0 10px rgba(255, 255, 255, 0.18));
 }
 
 .brand-item.brand-boost:hover img {
   filter:
-    drop-shadow(0 0 1.2px rgba(255, 255, 255, 0.98))
-    drop-shadow(0 0 14px rgba(255, 255, 255, 0.22));
+    drop-shadow(0 0 1.2px rgba(255, 255, 255, 0.98)) drop-shadow(0 0 14px rgba(255, 255, 255, 0.22));
 }
 
 /* ========== RESPONSIVE ========== */
@@ -237,12 +224,10 @@ onBeforeUnmount(() => {
     margin: 0 auto;
     height: 1px;
     min-height: 1px;
-    background: linear-gradient(
-      to right,
-      rgba(255, 255, 255, 0) 0%,
-      rgba(255, 255, 255, 0.55) 50%,
-      rgba(255, 255, 255, 0) 100%
-    );
+    background: linear-gradient(to right,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.55) 50%,
+        rgba(255, 255, 255, 0) 100%);
   }
 
   .brands-title {

@@ -279,6 +279,7 @@ onMounted(() => {
    TÍTULO
 =============================================== */
 .texturas-title {
+  font-family: 'Quicksand', sans-serif;
   display: flex;
   flex-direction: column;
   gap: 0.35rem;
@@ -290,7 +291,8 @@ onMounted(() => {
 }
 
 .texturas-title-line {
-  font-size: clamp(1.9rem, 3.5vw, 3rem);
+  font-family: 'Quicksand', sans-serif;
+  font-size: clamp(1rem, 2.5vw, 2.7rem);
   font-weight: 500;
   color: #ffffff;
   line-height: 1.18;
@@ -402,6 +404,7 @@ onMounted(() => {
 }
 
 .swatch-label {
+  font-family: 'Quicksand', sans-serif;
   font-size: 0.83rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;

@@ -25,7 +25,7 @@
         <ul class="navbar-nav ms-auto my-2 my-lg-0 d-flex gap-lg-4">
 
           <li class="nav-item">
-            <RouterLink class="nav-link nav-custom" to="/#inicio" @click="closeMenu">
+            <RouterLink class="nav-link nav-custom" to="/#hero" @click="closeMenu">
               Inicio
             </RouterLink>
           </li>
@@ -43,7 +43,7 @@
           </li>
 
           <li class="nav-item">
-            <RouterLink class="nav-link nav-custom" to="/#texturas" @click="closeMenu">
+            <RouterLink class="nav-link nav-custom" to="/#soluciones" @click="closeMenu">
               Cotizar
             </RouterLink>
           </li>
@@ -92,15 +92,18 @@ const closeMenu = () => {
 }
 
 /* NAV LINKS */
+/* NAV LINKS */
 .nav-custom {
   position: relative;
-  font-size: 1.25rem;
-  font-weight: 300;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
   color: #ffffff !important;
   padding-bottom: 5px;
-  letter-spacing: 0.7px;
+  letter-spacing: 0.14em; /* look premium */
   transition: color 0.3s ease;
 }
+
 
 .nav-custom::after {
   content: "";

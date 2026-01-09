@@ -69,9 +69,9 @@ export default {
     slides: {
       type: Array,
       default: () => [
-        { src: "@/assets/Img/Banner4.png", alt: "Cocina moderna 1" },
-        { src: "@/assets/Img/Banner5.png", alt: "Cocina moderna 2" },
-        { src: "@/assets/Img/Banner6.png", alt: "Cocina moderna 3" },
+        { src: "@/assets/Img/BannerSolucionesMedida/Banner4.png", alt: "Cocina moderna 1" },
+        { src: "@/assets/Img/BannerSolucionesMedida/Banner5.png", alt: "Cocina moderna 2" },
+        { src: "@/assets/Img/BannerSolucionesMedida/Banner6.png", alt: "Cocina moderna 3" },
       ],
     },
   },
@@ -112,11 +112,19 @@ export default {
     },
     goToWhatsApp(contexto) {
       const base = `https://wa.me/${this.whatsappNumber}`;
-      const text = encodeURIComponent(
-        `Hola, vengo desde la web de Plego y estoy interesado en: ${contexto}.`
-      );
+
+      const mensaje =
+        `Hola, Plego.\n` +
+        `Quería consultarles cuál es el proceso para cotizar mobiliario a medida ` +
+        `y si existe la posibilidad de coordinar una reunión para evaluar el proyecto.\n` +
+        `\n` +
+        `Estoy interesado en: ${contexto}.\n` +
+        `Quedo atento, muchas gracias.`;
+
+      const text = encodeURIComponent(mensaje);
       window.open(`${base}?text=${text}`, "_blank");
-    },
+    }
+
   },
 };
 </script>
@@ -130,59 +138,97 @@ export default {
   --plego-text: #ffffff;
 }
 
-/* SECTION LAYOUT */
+/* =========================
+   SECTION LAYOUT
+========================= */
 .plego-soluciones-section {
   position: relative;
-  height: 100vh;
+  height: auto;
   min-height: 100vh;
+  min-height: 100svh;
+  min-height: 100dvh;
   color: var(--plego-text);
   background-color: #000;
   overflow: hidden;
 }
 
-/* Carrusel de fondo full-screen */
+/* =========================
+   BACKGROUND CAROUSEL
+========================= */
 .plego-bg-carousel {
   position: absolute;
   inset: 0;
   z-index: 1;
+  width: 100%;
+  height: 100%;
 }
 
-.carousel-item,
-.plego-bg-img {
+.plego-bg-carousel .carousel-inner,
+.plego-bg-carousel .carousel-item {
   height: 100%;
 }
 
 .plego-bg-img {
   width: 100%;
+  height: 100%;
   object-fit: cover;
+  object-position: center;
+
+  /* ayuda a evitar “parpadeos” al cargar */
+  transform: translateZ(0);
 }
 
 .plego-bg-overlay {
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at center,
-      rgba(0, 0, 0, 0.45),
-      rgba(0, 0, 0, 0.8));
+  background: radial-gradient(
+    circle at center,
+    rgba(0, 0, 0, 0.45),
+    rgba(0, 0, 0, 0.82)
+  );
+
+  /* capa estable para que el blur tenga “algo” detrás */
+  transform: translateZ(0);
 }
 
-/* Contenido superpuesto */
+/* =========================
+   CAROUSEL HEIGHT FIX
+========================= */
+.plego-bg-carousel,
+.plego-bg-carousel .carousel-inner,
+.plego-bg-carousel .carousel-item {
+  height: 100%;
+  min-height: 100%;
+}
+
+.carousel-item.active,
+.carousel-item-next,
+.carousel-item-prev {
+  display: block;
+}
+
+/* =========================
+   CONTENT OVERLAY
+========================= */
 .plego-soluciones-content {
   position: relative;
   z-index: 3;
-  height: 100%;
   width: 100%;
+  height: 100%;
 
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 
-  padding-top: 2rem;
-  padding-inline: clamp(1.5rem, 6vw, 3rem);
-  gap: 1.5rem;
+  padding-block: clamp(2rem, 5vh, 4rem);
+  padding-inline: clamp(1rem, 5vw, 3.25rem);
+  gap: clamp(1rem, 2vh, 1.6rem);
 }
 
-/* Animación por sección */
+/* =========================
+   REVEAL ANIM
+========================= */
 .plego-soluciones-title,
 .plego-subtitle,
 .plego-circles-wrapper {
@@ -205,25 +251,26 @@ export default {
 }
 
 @keyframes fadeDown {
-  0% {
-    opacity: 0;
-    transform: translateY(24px);
-  }
-
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  0% { opacity: 0; transform: translateY(24px); }
+  100% { opacity: 1; transform: translateY(0); }
 }
 
-/* Título */
+/* =========================
+   TITLE + SUBTITLE (FIX CENTRADO)
+========================= */
 .plego-soluciones-title {
-  font-size: clamp(1.8rem, 2.4vw, 2.4rem);
+  font-family: 'Quicksand', sans-serif;
+  font-size: clamp(1.55rem, 2.2vw, 2.4rem);
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #ffffff;
+  color: #fff;
   position: relative;
   padding-bottom: 0.8rem;
+  margin: 0;
+
+  width: 100%;
+  text-align: center;
+  margin-inline: auto;
 }
 
 .plego-soluciones-title::after {
@@ -231,73 +278,100 @@ export default {
   position: absolute;
   bottom: 0;
   left: 50%;
-  width: 140px;
+  width: min(140px, 60vw);
   height: 2px;
   transform: translateX(-50%);
-  background: linear-gradient(to right,
-      transparent,
-      rgba(200, 162, 122, 0.9),
-      transparent);
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(200, 162, 122, 0.9),
+    transparent
+  );
   border-radius: 8px;
 }
 
-/* Subtítulo */
 .plego-subtitle {
-  font-size: 0.9rem;
+  font-family: 'Quicksand', sans-serif;
+  font-size: clamp(0.78rem, 1.2vw, 0.95rem);
   opacity: 0.75;
   letter-spacing: 0.15em;
   text-transform: uppercase;
   margin: 0;
-}
+  max-width: 70ch;
 
-/* Wrapper círculos */
-.plego-circles-wrapper {
   width: 100%;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  place-items: center;
-  margin-top: 1.5rem;
-}
-
-/* Labels */
-.circle-label,
-.circle-label-uno,
-.circle-label-dev {
   text-align: center;
-  font-size: 1.22rem !important;
-  line-height: 1.33;
-  letter-spacing: 0.03em;
-  font-weight: 600;
-  max-width: 80%;
   margin-inline: auto;
 }
 
-/* Círculo */
+/* =========================
+   CIRCLES WRAPPER
+========================= */
+.plego-circles-wrapper {
+  width: min(1250px, 100%);
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  place-items: center;
+  gap: clamp(1.5rem, 3vw, 3rem);
+  margin-top: clamp(1rem, 2vh, 1.8rem);
+}
+
+/* =========================
+   LABELS (FIX BUG VISUAL)
+========================= */
+.circle-label,
+.circle-label-uno,
+.circle-label-dev {
+  font-family: 'Quicksand', sans-serif;
+
+  display: block;
+  width: 100%;
+  text-align: center;
+  margin-inline: auto;
+
+  font-size: clamp(1.05rem, 1.05vw, 1.2rem) !important;
+  line-height: 1.35;
+  letter-spacing: 0.12em;
+  font-weight: 600;
+  max-width: 85%;
+  text-wrap: balance;
+}
+
+/* =========================
+   CIRCLE BUTTON (BLUR CONSISTENTE)
+========================= */
 .plego-circle-btn {
   position: relative;
-  width: clamp(310px, 33vw, 390px);
+  width: clamp(310px, 28vw, 370px); /* un poquito más chico */
   aspect-ratio: 1 / 1;
   border-radius: 50%;
   border: none;
 
-  background: rgba(255, 255, 255, 0.04);
-  backdrop-filter: blur(18px) brightness(1.15);
+  background: rgba(255, 255, 255, 0.075);
+
+  /* blur estable */
+  backdrop-filter: blur(28px) saturate(1.25) brightness(1.08);
+  -webkit-backdrop-filter: blur(28px) saturate(1.25) brightness(1.08);
 
   color: var(--plego-text);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
   gap: 0.6rem;
   cursor: pointer;
   overflow: hidden;
-  padding: 1.6rem;
+  padding: 1.5rem;
   isolation: isolate;
+  text-align: center;
+
+  /* ✅ fix “a veces no toma blur”: fuerza capa */
+  transform: translateZ(0);
+  will-change: transform, backdrop-filter;
+
   box-shadow: 0 18px 40px rgba(0, 0, 0, 0.65);
-  transition:
-    transform 0.25s ease,
-    box-shadow 0.25s ease,
-    background 0.25s ease;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
 }
 
 .plego-circle-btn::before {
@@ -321,51 +395,54 @@ export default {
   opacity: 0.6;
 }
 
-.plego-circle-btn:hover {
-  transform: translateY(-4px) scale(1.04);
-  box-shadow: 0 22px 55px rgba(0, 0, 0, 0.8);
-  background: rgba(20, 16, 14, 0.96);
+@media (hover: hover) and (pointer: fine) {
+  .plego-circle-btn:hover {
+    transform: translateY(-4px) scale(1.04);
+    box-shadow: 0 22px 55px rgba(0, 0, 0, 0.8);
+    background: rgba(20, 16, 14, 0.96);
+  }
 }
 
-/* Línea separadora: oculta por defecto */
+/* Línea separadora */
 .circle-separator {
   width: 45%;
   height: 1px;
   background: rgba(255, 255, 255, 0.18);
   margin: 4px auto 6px;
-
   opacity: 0;
   transform: scaleX(0.6);
-  transition:
-    opacity 0.35s ease,
-    transform 0.35s ease;
+  transition: opacity 0.35s ease, transform 0.35s ease;
 }
 
-/* Texto descriptivo: oculto por defecto */
+/* Texto descriptivo */
 .circle-copy {
-  font-size: 0.8rem;
+  font-size: clamp(0.85rem, 0.9vw, 1rem);
   text-align: center;
-  max-width: 15rem;
+  max-width: min(20rem, 78%);
   opacity: 0;
   transform: translateY(8px);
-  transition:
-    opacity 0.35s ease,
-    transform 0.35s ease;
+  transition: opacity 0.35s ease, transform 0.35s ease;
 }
 
-.plego-circle-btn:hover .circle-separator {
-  opacity: 1;
-  transform: scaleX(1);
+@media (hover: hover) and (pointer: fine) {
+  .plego-circle-btn:hover .circle-separator {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+
+  .plego-circle-btn:hover .circle-copy {
+    opacity: 0.9;
+    transform: translateY(0);
+  }
+
+  .plego-circle-btn:hover .circle-label {
+    color: var(--plego-main);
+  }
 }
 
-.plego-circle-btn:hover .circle-copy {
-  opacity: 0.9;
-  transform: translateY(0);
-}
-
-
-
-/* ÓRBITAS */
+/* =========================
+   ORBITS
+========================= */
 .plego-circle-orbit {
   position: absolute;
   inset: 0;
@@ -395,65 +472,89 @@ export default {
   height: 8px;
   border-radius: 50%;
   background: var(--plego-main);
-  box-shadow:
-    0 0 6px var(--plego-main),
-    0 0 12px rgba(200, 162, 122, 0.8);
+  box-shadow: 0 0 6px var(--plego-main), 0 0 12px rgba(200, 162, 122, 0.8);
   top: 50%;
   left: 50%;
   transform-origin: center;
   animation: orbit 4.5s linear infinite;
 }
 
-.plego-circle-btn:hover .orbit-dot {
-  animation-duration: 3.4s !important;
-}
-
-.plego-circle-btn:hover .circle-label {
-  color: var(--plego-main);
+@media (hover: hover) and (pointer: fine) {
+  .plego-circle-btn:hover .orbit-dot {
+    animation-duration: 3.4s !important;
+  }
 }
 
 @keyframes orbit {
-  0% {
-    transform: rotate(0deg) translateX(47%);
-  }
-
-  100% {
-    transform: rotate(360deg) translateX(47%);
-  }
+  0% { transform: rotate(0deg) translateX(47%); }
+  100% { transform: rotate(360deg) translateX(47%); }
 }
 
 @keyframes orbit-trail {
-  0% {
-    transform: translate(-50%, -50%) rotate(0deg);
-  }
-
-  100% {
-    transform: translate(-50%, -50%) rotate(360deg);
-  }
+  0% { transform: translate(-50%, -50%) rotate(0deg); }
+  100% { transform: translate(-50%, -50%) rotate(360deg); }
 }
 
-/* RESPONSIVE */
+/* =========================
+   MOBILE
+========================= */
 @media (max-width: 768px) {
   .plego-soluciones-content {
-    padding-top: 4rem;
-    gap: 2rem;
+    justify-content: flex-start;
+    padding-top: clamp(3.2rem, 7vh, 4.6rem);
+    padding-bottom: calc(clamp(1.2rem, 4vh, 2.2rem) + env(safe-area-inset-bottom));
+    gap: 1rem;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
 
   .plego-circles-wrapper {
     grid-template-columns: 1fr;
     row-gap: 2rem;
+    width: 100%;
   }
 
   .plego-circle-btn {
-    width: 260px;
-    padding: 1.4rem;
+    width: clamp(235px, 82vw, 315px);
+    padding: 1.35rem;
+
+    /* blur también en mobile (mismos valores base) */
+    backdrop-filter: blur(28px) saturate(1.3) brightness(1.08);
+    -webkit-backdrop-filter: blur(28px) saturate(1.3) brightness(1.08);
   }
 
   .circle-label,
   .circle-label-uno,
   .circle-label-dev {
+    max-width: 92%;
+    letter-spacing: 0.1em;
     font-size: 1.05rem !important;
-    max-width: 90%;
+  }
+
+  .orbit-trail { width: 92%; height: 92%; }
+}
+
+/* Pantallas bajitas */
+@media (max-height: 740px) {
+  .plego-soluciones-section {
+    height: auto;
+    min-height: 100svh;
+  }
+
+  .plego-soluciones-content {
+    justify-content: flex-start;
+    padding-top: 3rem;
+    padding-bottom: calc(1.5rem + env(safe-area-inset-bottom));
+    gap: 0.9rem;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
 }
+
 </style>
+
+
+
+
+
+

@@ -1,10 +1,5 @@
 <template>
-  <section
-    id="proyectos"
-    class="projects-wrapper"
-    ref="sectionRef"
-    :class="{ 'is-visible': isVisible }"
-  >
+  <section id="proyectos" class="projects-wrapper" ref="sectionRef" :class="{ 'is-visible': isVisible }">
     <div class="container">
 
       <!-- HEADER -->
@@ -24,29 +19,11 @@
         </button>
 
         <!-- TRACK -->
-        <div
-          ref="trackRef"
-          class="projects-track"
-          :class="{ 'is-dragging': isUserInteracting }"
-          @scroll="onTrackScroll"
-          @pointerdown="onUserStart"
-          @pointerup="onUserEnd"
-          @pointercancel="onUserEnd"
-          @touchstart.passive="onUserStart"
-          @touchend="onUserEnd"
-        >
-          <article
-            v-for="(item, i) in proyectos"
-            :key="i"
-            class="project-card"
-            @click="openLightbox(item.img)"
-          >
-            <img
-              :src="item.img"
-              :alt="item.alt"
-              class="project-img"
-              loading="lazy"
-            />
+        <div ref="trackRef" class="projects-track" :class="{ 'is-dragging': isUserInteracting }" @scroll="onTrackScroll"
+          @pointerdown="onUserStart" @pointerup="onUserEnd" @pointercancel="onUserEnd" @touchstart.passive="onUserStart"
+          @touchend="onUserEnd">
+          <article v-for="(item, i) in proyectos" :key="i" class="project-card" @click="openLightbox(item.img)">
+            <img :src="item.img" :alt="item.alt" class="project-img" loading="lazy" />
           </article>
         </div>
 
@@ -58,12 +35,8 @@
 
       <!-- CTA -->
       <div class="cta-wrapper">
-        <a
-          href="https://www.instagram.com/plegoamoblamientos"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="cta-btn"
-        >
+        <a href="https://www.instagram.com/plegoamoblamientos" target="_blank" rel="noopener noreferrer"
+          class="cta-btn">
           Descubrí más
         </a>
       </div>
@@ -331,7 +304,7 @@ onUnmounted(() => {
 }
 
 .title {
-  font-family: 'Federo', sans-serif;
+  font-family: 'Quicksand', sans-serif;
   font-size: clamp(2.4rem, 4vw, 3.2rem);
   color: #fff;
 }
@@ -375,13 +348,15 @@ onUnmounted(() => {
 }
 
 .projects-track.is-dragging {
-  scroll-snap-type: none; /* mientras arrastra, no pega saltos raros */
+  scroll-snap-type: none;
+  /* mientras arrastra, no pega saltos raros */
   cursor: grabbing;
 }
 
 .project-card {
   flex: 0 0 calc((100% - 3 * 1.5rem) / 4);
-  scroll-snap-align: center; /* 👈 ahora centra */
+  scroll-snap-align: center;
+  /* 👈 ahora centra */
   border-radius: 20px;
   overflow: hidden;
   aspect-ratio: 3 / 4;
@@ -404,8 +379,13 @@ onUnmounted(() => {
 }
 
 /* ocultar scrollbar */
-.projects-track::-webkit-scrollbar { display: none; }
-.projects-track { scrollbar-width: none; }
+.projects-track::-webkit-scrollbar {
+  display: none;
+}
+
+.projects-track {
+  scrollbar-width: none;
+}
 
 /* ==========================
    BOTONES
@@ -429,8 +409,13 @@ onUnmounted(() => {
   transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.nav-left { left: -18px; }
-.nav-right { right: -18px; }
+.nav-left {
+  left: -18px;
+}
+
+.nav-right {
+  right: -18px;
+}
 
 .nav-btn:hover {
   background: rgba(244, 200, 121, 0.95);
@@ -532,27 +517,53 @@ onUnmounted(() => {
 }
 
 @keyframes lightbox-in {
-  from { opacity: 0; transform: translateY(10px) scale(0.97); }
-  to   { opacity: 1; transform: translateY(0) scale(1); }
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.97);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 /* ==========================
    RESPONSIVE
 ========================== */
 @media (max-width: 1024px) {
-  .project-card { flex: 0 0 calc((100% - 1.5rem) / 2); }
-  .nav-left { left: -8px; }
-  .nav-right { right: -8px; }
+  .project-card {
+    flex: 0 0 calc((100% - 1.5rem) / 2);
+  }
+
+  .nav-left {
+    left: -8px;
+  }
+
+  .nav-right {
+    right: -8px;
+  }
 }
 
 @media (max-width: 640px) {
-  .projects-wrapper { padding: 4.5rem 0 4rem; }
-  .project-card { flex: 0 0 80vw; }
-  .nav-btn { width: 34px; height: 34px; }
+  .projects-wrapper {
+    padding: 4.5rem 0 4rem;
+  }
+
+  .project-card {
+    flex: 0 0 80vw;
+  }
+
+  .nav-btn {
+    width: 34px;
+    height: 34px;
+  }
 
   .lightbox-close {
-    top: 1rem; right: 1rem;
-    width: 34px; height: 34px;
+    top: 1rem;
+    right: 1rem;
+    width: 34px;
+    height: 34px;
     font-size: 1.3rem;
   }
 }

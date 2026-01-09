@@ -22,6 +22,18 @@
             <div class="hero-overlay"></div>
           </div>
         </div>
+
+        <div class="carousel-item">
+          <div class="hero-slide" :style="{ backgroundImage: `url(${banner4})` }">
+            <div class="hero-overlay"></div>
+          </div>
+        </div>
+
+        <div class="carousel-item">
+          <div class="hero-slide" :style="{ backgroundImage: `url(${banner5})` }">
+            <div class="hero-overlay"></div>
+          </div>
+        </div>
       </div>
 
       <!-- CONTROLES (ocultos por CSS) -->
@@ -55,9 +67,13 @@
 
 <script setup>
 import { onMounted } from "vue";
-import banner1 from "@/assets/Img/BannerPrueba1.png";
-import banner2 from "@/assets/Img/BannerPrueba2.png";
-import banner3 from "@/assets/Img/BannerPrueba3.png";
+import banner1 from "@/assets/Img/BannerHero/Banner1Inicio.png";
+import banner2 from "@/assets/Img/BannerHero/Banner2Inicio.png";
+import banner3 from "@/assets/Img/BannerHero/Banner3Inicio.png";
+import banner4 from "@/assets/Img/BannerHero/Banner4Inicio.png";
+import banner5 from "@/assets/Img/BannerHero/Banner5Inicio.png";
+
+
 import Lamparas3D from "@/components/Lamparas3D.vue";
 
 const irASoluciones = () => {
@@ -84,14 +100,14 @@ onMounted(() => {
 .hero-plego {
   position: relative;
   width: 100%;
-  min-height: calc(100vh - var(--nav-height));
+  min-height: 100vh;
   overflow: hidden;
 }
 
 .hero-bg,
 .hero-plego .carousel-inner,
 .hero-plego .carousel-item {
-  height: calc(100vh - var(--nav-height));
+  height: 100vh;
 }
 
 .hero-slide {
@@ -144,36 +160,47 @@ onMounted(() => {
 
 /* TEXTO */
 .hero-text {
-  font-family: "Inter", sans-serif;
+  font-family: 'Quicksand', sans-serif;
   font-size: 1.15rem;
-  line-height: 1.7;
+  line-height: 1.8;
   max-width: 680px;
   margin-bottom: 2rem;
+  letter-spacing: 0.05em;
+  color: #f1f1f1;
+}
+
+.hero-text strong {
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: lowercase;
+  color: #ffffff;
 }
 
 /* BOTÓN */
 .btn-hero {
+  font-family: 'Quicksand', sans-serif;
+  letter-spacing: 0.18em;
+  font-weight: 600;
+
   display: inline-flex;
-  /* 👈 deja de ocupar todo el ancho */
   align-items: center;
   justify-content: center;
   align-self: flex-start;
-  /* 👈 se queda a la izquierda */
-  padding: 0.7rem 1.9rem;
+  padding: 0.75rem 2.1rem;
   border-radius: 999px;
   border: none;
   cursor: pointer;
-  background: #fff;
+  background: linear-gradient(135deg, #ffffff, #ececec);
   color: #222;
-  font-weight: 500;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
-  transition: all 0.25s ease;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  transition: all 0.35s cubic-bezier(.16, .84, .44, 1.2);
 }
 
 .btn-hero:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 34px rgba(0, 0, 0, 0.35);
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 16px 42px rgba(0, 0, 0, 0.45);
 }
+
 
 /* ======================= */
 /* 🔥 ANIMACIONES */

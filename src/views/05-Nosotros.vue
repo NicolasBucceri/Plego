@@ -1,9 +1,5 @@
 <template>
-  <section
-    class="nosotros-wrapper"
-    ref="sectionRef"
-    :class="{ 'is-visible': isVisible }"
-  >
+  <section class="nosotros-wrapper" ref="sectionRef" :class="{ 'is-visible': isVisible }">
     <div class="container">
 
       <!-- ============ BLOQUE NOSOTROS ============ -->
@@ -32,14 +28,7 @@
 
         <!-- Video lateral -->
         <div class="nosotros-media">
-          <video
-            class="nosotros-video"
-            src="@/assets/Img/VideoNosotros.mp4"
-            autoplay
-            muted
-            loop
-            playsinline
-          ></video>
+          <video class="nosotros-video" src="@/assets/Img/VideoNosotros.mp4" autoplay muted loop playsinline></video>
         </div>
 
       </div>
@@ -134,7 +123,7 @@ onBeforeUnmount(() => {
 }
 
 .nos-title {
-  font-family: 'Federo', sans-serif;
+  font-family: 'Quicksand', sans-serif;
   font-size: 2.6rem;
   margin: 0 0 1.8rem;
   letter-spacing: 0.12em;
@@ -168,7 +157,8 @@ onBeforeUnmount(() => {
 .nosotros-video {
   width: 100%;
   height: 100%;
-  object-fit: contain; /* video completo, sin recorte */
+  object-fit: contain;
+  /* video completo, sin recorte */
   display: block;
   filter: brightness(0.95) contrast(1.05);
 }

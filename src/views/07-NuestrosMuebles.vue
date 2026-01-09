@@ -1,9 +1,5 @@
 <template>
-  <section
-    ref="sectionRef"
-    class="muebles-wrapper"
-    :class="{ 'is-visible': isVisible }"
-  >
+  <section ref="sectionRef" class="muebles-wrapper" :class="{ 'is-visible': isVisible }">
     <div class="container">
 
       <!-- HEADER -->
@@ -15,11 +11,7 @@
 
       <!-- GRID -->
       <div class="muebles-grid">
-        <div
-          v-for="(item, i) in features"
-          :key="i"
-          class="feature-item"
-        >
+        <div v-for="(item, i) in features" :key="i" class="feature-item">
           <!-- ÍCONO FONT AWESOME -->
           <i :class="item.icon" class="feature-icon"></i>
 
@@ -128,22 +120,21 @@ onBeforeUnmount(() => {
   width: 420px;
   height: 2px;
   margin: 0 auto 2.4rem auto;
-  background: linear-gradient(
-    to right,
-    rgba(244, 200, 121, 0),
-    rgba(244, 200, 121, 0.9),
-    rgba(244, 200, 121, 0)
-  );
+  background: linear-gradient(to right,
+      rgba(244, 200, 121, 0),
+      rgba(244, 200, 121, 0.9),
+      rgba(244, 200, 121, 0));
   box-shadow: 0 0 14px rgba(244, 200, 121, 0.3);
 }
 
 .title {
-  font-family: 'Federo', sans-serif !important;
+  font-family: 'Quicksand', sans-serif;
   font-size: clamp(2.4rem, 4vw, 3.2rem);
   letter-spacing: 0.5px;
   font-weight: 400;
   color: #ffffff;
-  margin: 0; /* opcional si querés controlarlo mejor */
+  margin: 0;
+  /* opcional si querés controlarlo mejor */
   line-height: 1.1;
 }
 
@@ -213,27 +204,44 @@ onBeforeUnmount(() => {
   animation: fadeCard 0.7s ease-out forwards;
   animation-delay: 0.15s;
 }
+
 .muebles-wrapper.is-visible .feature-item:nth-child(2) {
   animation: fadeCard 0.7s ease-out forwards;
   animation-delay: 0.25s;
 }
+
 .muebles-wrapper.is-visible .feature-item:nth-child(3) {
   animation: fadeCard 0.7s ease-out forwards;
   animation-delay: 0.35s;
 }
+
 .muebles-wrapper.is-visible .feature-item:nth-child(4) {
   animation: fadeCard 0.7s ease-out forwards;
   animation-delay: 0.45s;
 }
 
 @keyframes fadeUp {
-  from { opacity: 0; transform: translateY(24px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes fadeCard {
-  from { opacity: 0; transform: translateY(18px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* ============================
