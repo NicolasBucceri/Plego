@@ -4,7 +4,7 @@
       <!-- HEADER -->
       <header class="projects-header">
         <span class="eyebrow">Ambientes Plego</span>
-        <h2 class="title">Proyectos</h2>
+        <h2 class="title">Nuestros Proyectos</h2>
         <p class="subtitle">
           Algunos de los espacios donde nuestros muebles ya están siendo parte del día a día.
         </p>
@@ -13,33 +13,16 @@
       <!-- =========================
            CARRUSEL PRINCIPAL
       ========================== -->
-      <div
-        ref="mainCarouselRef"
-        class="projects-shell"
-        @mouseenter="pauseAuto(0)"
-        @mouseleave="resumeAuto(0)"
-      >
+      <div ref="mainCarouselRef" class="projects-shell" @mouseenter="pauseAuto(0)" @mouseleave="resumeAuto(0)">
         <button class="nav-btn nav-left" @click="prev(0)" aria-label="Ver proyectos anteriores">
           <i class="fas fa-chevron-left"></i>
         </button>
 
-        <div
-          ref="track0"
-          class="projects-track"
-          :class="{ 'is-dragging': isUserInteracting }"
-          @scroll="onTrackScroll(0)"
-          @pointerdown="onUserStart(0)"
-          @pointerup="onUserEnd(0)"
-          @pointercancel="onUserEnd(0)"
-          @touchstart.passive="onUserStart(0)"
-          @touchend="onUserEnd(0)"
-        >
-          <article
-            v-for="(item, i) in proyectos"
-            :key="`main-${i}`"
-            class="project-card"
-            @click="openLightbox(item.img)"
-          >
+        <div ref="track0" class="projects-track" :class="{ 'is-dragging': isUserInteracting }"
+          @scroll="onTrackScroll(0)" @pointerdown="onUserStart(0)" @pointerup="onUserEnd(0)"
+          @pointercancel="onUserEnd(0)" @touchstart.passive="onUserStart(0)" @touchend="onUserEnd(0)">
+          <article v-for="(item, i) in proyectos" :key="`main-${i}`" class="project-card"
+            @click="openLightbox(item.img)">
             <img :src="item.img" :alt="item.alt" class="project-img" loading="lazy" />
           </article>
         </div>
@@ -67,23 +50,11 @@
               <i class="fas fa-chevron-left"></i>
             </button>
 
-            <div
-              ref="track1"
-              class="projects-track"
-              :class="{ 'is-dragging': isUserInteracting }"
-              @scroll="onTrackScroll(1)"
-              @pointerdown="onUserStart(1)"
-              @pointerup="onUserEnd(1)"
-              @pointercancel="onUserEnd(1)"
-              @touchstart.passive="onUserStart(1)"
-              @touchend="onUserEnd(1)"
-            >
-              <article
-                v-for="(item, i) in proyectosExtra1"
-                :key="`extra1-${i}`"
-                class="project-card"
-                @click="openLightbox(item.img)"
-              >
+            <div ref="track1" class="projects-track" :class="{ 'is-dragging': isUserInteracting }"
+              @scroll="onTrackScroll(1)" @pointerdown="onUserStart(1)" @pointerup="onUserEnd(1)"
+              @pointercancel="onUserEnd(1)" @touchstart.passive="onUserStart(1)" @touchend="onUserEnd(1)">
+              <article v-for="(item, i) in proyectosExtra1" :key="`extra1-${i}`" class="project-card"
+                @click="openLightbox(item.img)">
                 <img :src="item.img" :alt="item.alt" class="project-img" loading="lazy" />
               </article>
             </div>
@@ -99,23 +70,11 @@
               <i class="fas fa-chevron-left"></i>
             </button>
 
-            <div
-              ref="track2"
-              class="projects-track"
-              :class="{ 'is-dragging': isUserInteracting }"
-              @scroll="onTrackScroll(2)"
-              @pointerdown="onUserStart(2)"
-              @pointerup="onUserEnd(2)"
-              @pointercancel="onUserEnd(2)"
-              @touchstart.passive="onUserStart(2)"
-              @touchend="onUserEnd(2)"
-            >
-              <article
-                v-for="(item, i) in proyectosExtra2"
-                :key="`extra2-${i}`"
-                class="project-card"
-                @click="openLightbox(item.img)"
-              >
+            <div ref="track2" class="projects-track" :class="{ 'is-dragging': isUserInteracting }"
+              @scroll="onTrackScroll(2)" @pointerdown="onUserStart(2)" @pointerup="onUserEnd(2)"
+              @pointercancel="onUserEnd(2)" @touchstart.passive="onUserStart(2)" @touchend="onUserEnd(2)">
+              <article v-for="(item, i) in proyectosExtra2" :key="`extra2-${i}`" class="project-card"
+                @click="openLightbox(item.img)">
                 <img :src="item.img" :alt="item.alt" class="project-img" loading="lazy" />
               </article>
             </div>
@@ -131,23 +90,11 @@
               <i class="fas fa-chevron-left"></i>
             </button>
 
-            <div
-              ref="track3"
-              class="projects-track"
-              :class="{ 'is-dragging': isUserInteracting }"
-              @scroll="onTrackScroll(3)"
-              @pointerdown="onUserStart(3)"
-              @pointerup="onUserEnd(3)"
-              @pointercancel="onUserEnd(3)"
-              @touchstart.passive="onUserStart(3)"
-              @touchend="onUserEnd(3)"
-            >
-              <article
-                v-for="(item, i) in proyectosExtra3"
-                :key="`extra3-${i}`"
-                class="project-card"
-                @click="openLightbox(item.img)"
-              >
+            <div ref="track3" class="projects-track" :class="{ 'is-dragging': isUserInteracting }"
+              @scroll="onTrackScroll(3)" @pointerdown="onUserStart(3)" @pointerup="onUserEnd(3)"
+              @pointercancel="onUserEnd(3)" @touchstart.passive="onUserStart(3)" @touchend="onUserEnd(3)">
+              <article v-for="(item, i) in proyectosExtra3" :key="`extra3-${i}`" class="project-card"
+                @click="openLightbox(item.img)">
                 <img :src="item.img" :alt="item.alt" class="project-img" loading="lazy" />
               </article>
             </div>
@@ -556,6 +503,7 @@ onUnmounted(() => {
 .projects-track::-webkit-scrollbar {
   display: none;
 }
+
 .projects-track {
   scrollbar-width: none;
 }
@@ -637,8 +585,13 @@ onUnmounted(() => {
 }
 
 /* adentro del carrusel */
-.nav-left { left: 10px; }
-.nav-right { right: 10px; }
+.nav-left {
+  left: 10px;
+}
+
+.nav-right {
+  right: 10px;
+}
 
 /* ==========================
    CTA
@@ -700,6 +653,7 @@ onUnmounted(() => {
 .fade-slide-leave-active {
   transition: opacity 0.35s ease, transform 0.35s ease;
 }
+
 .fade-slide-enter-from,
 .fade-slide-leave-to {
   opacity: 0;
@@ -760,8 +714,15 @@ onUnmounted(() => {
 }
 
 @keyframes lightbox-in {
-  from { opacity: 0; transform: translateY(10px) scale(0.97); }
-  to { opacity: 1; transform: translateY(0) scale(1); }
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.97);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 /* ==========================
@@ -771,8 +732,14 @@ onUnmounted(() => {
   .project-card {
     flex: 0 0 calc((100% - 1.5rem) / 2);
   }
-  .nav-left { left: 8px; }
-  .nav-right { right: 8px; }
+
+  .nav-left {
+    left: 8px;
+  }
+
+  .nav-right {
+    right: 8px;
+  }
 }
 
 @media (max-width: 640px) {
