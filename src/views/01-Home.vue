@@ -19,12 +19,12 @@
     <ComoTrabajamos />
   </section>
 
-  <section id="nuestrosMuebles">
-    <NuestrosMuebles />
-  </section>
-
   <section id="proyectoCarrusel">
     <ProyectosCarrusel />
+  </section>
+
+  <section id="nuestrosMuebles">
+    <NuestrosMuebles />
   </section>
 
   <section id="Marcas">

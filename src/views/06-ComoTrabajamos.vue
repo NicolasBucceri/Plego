@@ -29,16 +29,12 @@
       </div>
     </div>
 
-    <!-- ============ BANNER INFERIOR ============ -->
-    <BannerPanoramico :src="bannerTrabajamos" alt="Banner Plego" ratio="16/4" :maxHeight="420" />
-
   </section>
 </template>
 
 <script setup>
 import { ref, onMounted, onBeforeUnmount } from 'vue'
 
-import BannerPanoramico from "@/components/BannerPanoramico.vue";
 import bannerTrabajamos from "@/assets/Img/BannerTrabajamos.jpeg";
 
 /* PASOS DEL PROCESO */
