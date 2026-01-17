@@ -11,7 +11,7 @@
       </header>
 
       <!-- =========================
-           CARRUSEL PRINCIPAL
+           CARRUSEL PRINCIPAL (NO TOCAR)
       ========================== -->
       <div ref="mainCarouselRef" class="projects-shell" @mouseenter="pauseAuto(0)" @mouseleave="resumeAuto(0)">
         <button class="nav-btn nav-left" @click="prev(0)" aria-label="Ver proyectos anteriores">
@@ -21,9 +21,8 @@
         <div ref="track0" class="projects-track" :class="{ 'is-dragging': isUserInteracting }"
           @scroll="onTrackScroll(0)" @pointerdown="onUserStart(0)" @pointerup="onUserEnd(0)"
           @pointercancel="onUserEnd(0)" @touchstart.passive="onUserStart(0)" @touchend="onUserEnd(0)">
-          <article v-for="(item, i) in proyectos" :key="`main-${i}`" class="project-card"
-            @click="openLightbox(item.img)">
-            <img :src="item.img" :alt="item.alt" class="project-img" loading="lazy" />
+          <article v-for="(item, i) in proyectos" :key="`main-${i}`" class="project-card" @click="openMedia(item)">
+            <img :src="item.src" :alt="item.alt" class="project-media" loading="lazy" />
           </article>
         </div>
 
@@ -34,91 +33,124 @@
 
       <!-- CTA ARRIBA: SOLO CUANDO NO ESTÁ ABIERTO -->
       <div v-if="!showMore" class="cta-wrapper">
-        <button class="cta-btn" type="button" @click="toggleMas">
-          Descubrí más
-        </button>
+        <button class="cta-btn" type="button" @click="toggleMas">Descubrí más</button>
       </div>
 
       <!-- =========================
-           3 CARRUSELES EXTRA (SIN TÍTULOS)
+           3 CARRUSELES EXTRA (VIDEO EN LA MISMA CARD)
       ========================== -->
       <transition name="fade-slide">
         <div v-if="showMore" class="extras-wrapper">
-          <!-- Extra 1 -->
-          <div class="projects-shell" @mouseenter="pauseAuto(1)" @mouseleave="resumeAuto(1)">
-            <button class="nav-btn nav-left" @click="prev(1)" aria-label="Anterior">
-              <i class="fas fa-chevron-left"></i>
-            </button>
+          <!-- ================== EXTRA 1: PLACARES ================== -->
+          <div class="extra-block">
+            <h3 class="extra-title">Placares</h3>
 
-            <div ref="track1" class="projects-track" :class="{ 'is-dragging': isUserInteracting }"
-              @scroll="onTrackScroll(1)" @pointerdown="onUserStart(1)" @pointerup="onUserEnd(1)"
-              @pointercancel="onUserEnd(1)" @touchstart.passive="onUserStart(1)" @touchend="onUserEnd(1)">
-              <article v-for="(item, i) in proyectosExtra1" :key="`extra1-${i}`" class="project-card"
-                @click="openLightbox(item.img)">
-                <img :src="item.img" :alt="item.alt" class="project-img" loading="lazy" />
-              </article>
+            <div class="projects-shell" @mouseenter="pauseAuto(1)" @mouseleave="resumeAuto(1)">
+              <button class="nav-btn nav-left" @click="prev(1)" aria-label="Anterior">
+                <i class="fas fa-chevron-left"></i>
+              </button>
+
+              <div ref="track1" class="projects-track" :class="{ 'is-dragging': isUserInteracting }"
+                @scroll="onTrackScroll(1)" @pointerdown="onUserStart(1)" @pointerup="onUserEnd(1)"
+                @pointercancel="onUserEnd(1)" @touchstart.passive="onUserStart(1)" @touchend="onUserEnd(1)">
+                <article v-for="(item, i) in proyectosExtra1" :key="`extra1-${i}`" class="project-card"
+                  @click="openMedia(item)">
+                  <img v-if="item.type === 'img'" :src="item.src" :alt="item.alt" class="project-media"
+                    loading="lazy" />
+                  <video v-else class="project-media" :src="item.src" muted loop playsinline preload="metadata"></video>
+
+                  <span v-if="item.type === 'video'" class="video-badge" aria-hidden="true">
+  <svg viewBox="0 0 24 24" class="video-icon">
+    <path d="M8 5v14l11-7z" />
+  </svg>
+</span>
+
+                </article>
+              </div>
+
+              <button class="nav-btn nav-right" @click="next(1)" aria-label="Siguiente">
+                <i class="fas fa-chevron-right"></i>
+              </button>
             </div>
-
-            <button class="nav-btn nav-right" @click="next(1)" aria-label="Siguiente">
-              <i class="fas fa-chevron-right"></i>
-            </button>
           </div>
 
-          <!-- Extra 2 -->
-          <div class="projects-shell" @mouseenter="pauseAuto(2)" @mouseleave="resumeAuto(2)">
-            <button class="nav-btn nav-left" @click="prev(2)" aria-label="Anterior">
-              <i class="fas fa-chevron-left"></i>
-            </button>
+          <!-- ================== EXTRA 2: COCINA ================== -->
+          <div class="extra-block">
+            <h3 class="extra-title">Cocina</h3>
 
-            <div ref="track2" class="projects-track" :class="{ 'is-dragging': isUserInteracting }"
-              @scroll="onTrackScroll(2)" @pointerdown="onUserStart(2)" @pointerup="onUserEnd(2)"
-              @pointercancel="onUserEnd(2)" @touchstart.passive="onUserStart(2)" @touchend="onUserEnd(2)">
-              <article v-for="(item, i) in proyectosExtra2" :key="`extra2-${i}`" class="project-card"
-                @click="openLightbox(item.img)">
-                <img :src="item.img" :alt="item.alt" class="project-img" loading="lazy" />
-              </article>
+            <div class="projects-shell" @mouseenter="pauseAuto(2)" @mouseleave="resumeAuto(2)">
+              <button class="nav-btn nav-left" @click="prev(2)" aria-label="Anterior">
+                <i class="fas fa-chevron-left"></i>
+              </button>
+
+              <div ref="track2" class="projects-track" :class="{ 'is-dragging': isUserInteracting }"
+                @scroll="onTrackScroll(2)" @pointerdown="onUserStart(2)" @pointerup="onUserEnd(2)"
+                @pointercancel="onUserEnd(2)" @touchstart.passive="onUserStart(2)" @touchend="onUserEnd(2)">
+                <article v-for="(item, i) in proyectosExtra2" :key="`extra2-${i}`" class="project-card"
+                  @click="openMedia(item)">
+                  <img v-if="item.type === 'img'" :src="item.src" :alt="item.alt" class="project-media"
+                    loading="lazy" />
+                  <video v-else class="project-media" :src="item.src" muted loop playsinline preload="metadata"></video>
+
+                  <span v-if="item.type === 'video'" class="video-badge" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" class="video-icon">
+                      <path d="M8 5v14l11-7z" />
+                    </svg>
+                  </span>
+
+                </article>
+              </div>
+
+              <button class="nav-btn nav-right" @click="next(2)" aria-label="Siguiente">
+                <i class="fas fa-chevron-right"></i>
+              </button>
             </div>
-
-            <button class="nav-btn nav-right" @click="next(2)" aria-label="Siguiente">
-              <i class="fas fa-chevron-right"></i>
-            </button>
           </div>
 
-          <!-- Extra 3 -->
-          <div class="projects-shell" @mouseenter="pauseAuto(3)" @mouseleave="resumeAuto(3)">
-            <button class="nav-btn nav-left" @click="prev(3)" aria-label="Anterior">
-              <i class="fas fa-chevron-left"></i>
-            </button>
+          <!-- ================== EXTRA 3: VANITORY ================== -->
+          <div class="extra-block">
+            <h3 class="extra-title">Vanitory</h3>
 
-            <div ref="track3" class="projects-track" :class="{ 'is-dragging': isUserInteracting }"
-              @scroll="onTrackScroll(3)" @pointerdown="onUserStart(3)" @pointerup="onUserEnd(3)"
-              @pointercancel="onUserEnd(3)" @touchstart.passive="onUserStart(3)" @touchend="onUserEnd(3)">
-              <article v-for="(item, i) in proyectosExtra3" :key="`extra3-${i}`" class="project-card"
-                @click="openLightbox(item.img)">
-                <img :src="item.img" :alt="item.alt" class="project-img" loading="lazy" />
-              </article>
+            <div class="projects-shell" @mouseenter="pauseAuto(3)" @mouseleave="resumeAuto(3)">
+              <button class="nav-btn nav-left" @click="prev(3)" aria-label="Anterior">
+                <i class="fas fa-chevron-left"></i>
+              </button>
+
+              <div ref="track3" class="projects-track" :class="{ 'is-dragging': isUserInteracting }"
+                @scroll="onTrackScroll(3)" @pointerdown="onUserStart(3)" @pointerup="onUserEnd(3)"
+                @pointercancel="onUserEnd(3)" @touchstart.passive="onUserStart(3)" @touchend="onUserEnd(3)">
+                <article v-for="(item, i) in proyectosExtra3" :key="`extra3-${i}`" class="project-card"
+                  @click="openMedia(item)">
+                  <img v-if="item.type === 'img'" :src="item.src" :alt="item.alt" class="project-media"
+                    loading="lazy" />
+                  <video v-else class="project-media" :src="item.src" muted loop playsinline preload="metadata"></video>
+
+                  <span v-if="item.type === 'video'" class="video-badge">▶</span>
+                </article>
+              </div>
+
+              <button class="nav-btn nav-right" @click="next(3)" aria-label="Siguiente">
+                <i class="fas fa-chevron-right"></i>
+              </button>
             </div>
-
-            <button class="nav-btn nav-right" @click="next(3)" aria-label="Siguiente">
-              <i class="fas fa-chevron-right"></i>
-            </button>
           </div>
 
           <!-- ✅ CTA ABAJO DEL TODO -->
           <div class="cta-wrapper cta-wrapper--bottom">
-            <button class="cta-btn" type="button" @click="toggleMas">
-              Mostrar menos
-            </button>
+            <button class="cta-btn" type="button" @click="toggleMas">Mostrar menos</button>
           </div>
         </div>
       </transition>
     </div>
 
-    <!-- LIGHTBOX -->
+    <!-- LIGHTBOX (IMG O VIDEO) -->
     <div v-if="lightboxOpen" class="lightbox-backdrop" @click.self="closeLightbox">
-      <button class="lightbox-close" @click="closeLightbox" aria-label="Cerrar imagen ampliada">×</button>
+      <button class="lightbox-close" @click="closeLightbox" aria-label="Cerrar">×</button>
+
       <div class="lightbox-content">
-        <img :src="lightboxImg" class="lightbox-img" />
+        <img v-if="lightboxItem?.type === 'img'" :src="lightboxItem.src" class="lightbox-img"
+          alt="Contenido ampliado" />
+        <video v-else :src="lightboxItem?.src" class="lightbox-img" controls autoplay playsinline></video>
       </div>
     </div>
   </section>
@@ -127,7 +159,7 @@
 <script setup>
 import { ref, onMounted, onUnmounted, nextTick } from "vue"
 
-/* ===== IMÁGENES ===== */
+/* ===== IMÁGENES PRINCIPAL ===== */
 import Carrusel1 from "@/assets/Img/ProyectosCarrusel/CarruselProyectos1.jpg"
 import Carrusel2 from "@/assets/Img/ProyectosCarrusel/CarruselProyectos2.jpg"
 import Carrusel3 from "@/assets/Img/ProyectosCarrusel/CarruselProyectos3.jpg"
@@ -142,24 +174,90 @@ import Carrusel11 from "@/assets/Img/ProyectosCarrusel/CarruselProyectos11.jpg"
 import Carrusel12 from "@/assets/Img/ProyectosCarrusel/CarruselProyectos12.jpg"
 
 const proyectos = [
-  { img: Carrusel1, alt: "Proyecto Plego 1" },
-  { img: Carrusel2, alt: "Proyecto Plego 2" },
-  { img: Carrusel3, alt: "Proyecto Plego 3" },
-  { img: Carrusel4, alt: "Proyecto Plego 4" },
-  { img: Carrusel5, alt: "Proyecto Plego 5" },
-  { img: Carrusel6, alt: "Proyecto Plego 6" },
-  { img: Carrusel7, alt: "Proyecto Plego 7" },
-  { img: Carrusel8, alt: "Proyecto Plego 8" },
-  { img: Carrusel9, alt: "Proyecto Plego 9" },
-  { img: Carrusel10, alt: "Proyecto Plego 10" },
-  { img: Carrusel11, alt: "Proyecto Plego 11" },
-  { img: Carrusel12, alt: "Proyecto Plego 12" },
+  { type: "img", src: Carrusel1, alt: "Proyecto Plego 1" },
+  { type: "img", src: Carrusel2, alt: "Proyecto Plego 2" },
+  { type: "img", src: Carrusel3, alt: "Proyecto Plego 3" },
+  { type: "img", src: Carrusel4, alt: "Proyecto Plego 4" },
+  { type: "img", src: Carrusel5, alt: "Proyecto Plego 5" },
+  { type: "img", src: Carrusel6, alt: "Proyecto Plego 6" },
+  { type: "img", src: Carrusel7, alt: "Proyecto Plego 7" },
+  { type: "img", src: Carrusel8, alt: "Proyecto Plego 8" },
+  { type: "img", src: Carrusel9, alt: "Proyecto Plego 9" },
+  { type: "img", src: Carrusel10, alt: "Proyecto Plego 10" },
+  { type: "img", src: Carrusel11, alt: "Proyecto Plego 11" },
+  { type: "img", src: Carrusel12, alt: "Proyecto Plego 12" },
 ]
 
-/* ✅ Por ahora duplican las mismas imágenes */
-const proyectosExtra1 = proyectos
-const proyectosExtra2 = proyectos
-const proyectosExtra3 = proyectos
+/* ===== PLACARES ===== */
+import Placard1 from "@/assets/Img/CarruselPlacard/Img1.webp"
+import Placard2 from "@/assets/Img/CarruselPlacard/Img2.webp"
+import Placard3 from "@/assets/Img/CarruselPlacard/Img3.webp"
+import Placard4 from "@/assets/Img/CarruselPlacard/Img4.webp"
+import Placard5 from "@/assets/Img/CarruselPlacard/Img5.webp"
+import Placard6 from "@/assets/Img/CarruselPlacard/Img6.webp"
+import Placard7 from "@/assets/Img/CarruselPlacard/Img7.webp"
+import Placard8 from "@/assets/Img/CarruselPlacard/Img8.webp"
+import Placard9 from "@/assets/Img/CarruselPlacard/Img9.webp"
+import PlacardVideo1 from "@/assets/Img/CarruselPlacard/Video1.mp4"
+import PlacardVideo2 from "@/assets/Img/CarruselPlacard/Video2.mp4"
+
+const proyectosExtra1 = [
+  { type: "img", src: Placard1, alt: "Placares Plego 1" },
+  { type: "img", src: Placard2, alt: "Placares Plego 2" },
+  { type: "img", src: Placard3, alt: "Placares Plego 3" },
+  { type: "img", src: Placard4, alt: "Placares Plego 4" },
+  { type: "img", src: Placard5, alt: "Placares Plego 5" },
+  { type: "img", src: Placard6, alt: "Placares Plego 6" },
+  { type: "img", src: Placard7, alt: "Placares Plego 7" },
+  { type: "img", src: Placard8, alt: "Placares Plego 8" },
+  { type: "img", src: Placard9, alt: "Placares Plego 9" },
+  { type: "video", src: PlacardVideo1, alt: "Placares Video 1" },
+  { type: "video", src: PlacardVideo2, alt: "Placares Video 2" },
+]
+
+/* ===== COCINA ===== */
+import Cocina1 from "@/assets/Img/CarrucelCocina/Img1.webp"
+import Cocina2 from "@/assets/Img/CarrucelCocina/Img2.webp"
+import Cocina3 from "@/assets/Img/CarrucelCocina/Img3.webp"
+import Cocina4 from "@/assets/Img/CarrucelCocina/Img4.webp"
+import Cocina5 from "@/assets/Img/CarrucelCocina/Img5.webp"
+import Cocina6 from "@/assets/Img/CarrucelCocina/Img6.webp"
+import Cocina7 from "@/assets/Img/CarrucelCocina/Img7.webp"
+import Cocina8 from "@/assets/Img/CarrucelCocina/Img8.webp"
+import Cocina9 from "@/assets/Img/CarrucelCocina/Img9.webp"
+import Cocina10 from "@/assets/Img/CarrucelCocina/Img10.webp"
+import CocinaVideo1 from "@/assets/Img/CarrucelCocina/Video1.mp4"
+import CocinaVideo2 from "@/assets/Img/CarrucelCocina/Video2.mp4"
+
+const proyectosExtra2 = [
+  { type: "img", src: Cocina1, alt: "Cocina Plego 1" },
+  { type: "img", src: Cocina2, alt: "Cocina Plego 2" },
+  { type: "img", src: Cocina3, alt: "Cocina Plego 3" },
+  { type: "img", src: Cocina4, alt: "Cocina Plego 4" },
+  { type: "img", src: Cocina5, alt: "Cocina Plego 5" },
+  { type: "img", src: Cocina6, alt: "Cocina Plego 6" },
+  { type: "img", src: Cocina7, alt: "Cocina Plego 7" },
+  { type: "img", src: Cocina8, alt: "Cocina Plego 8" },
+  { type: "img", src: Cocina9, alt: "Cocina Plego 9" },
+  { type: "img", src: Cocina10, alt: "Cocina Plego 10" },
+  { type: "video", src: CocinaVideo1, alt: "Cocina Video 1" },
+  { type: "video", src: CocinaVideo2, alt: "Cocina Video 2" },
+]
+
+/* ===== VANITORY ===== */
+import Vanitory1 from "@/assets/Img/CarruselVanitory/Img1.webp"
+import Vanitory2 from "@/assets/Img/CarruselVanitory/Img2.webp"
+import Vanitory3 from "@/assets/Img/CarruselVanitory/Img3.webp"
+import Vanitory4 from "@/assets/Img/CarruselVanitory/Img4.webp"
+import Vanitory5 from "@/assets/Img/CarruselVanitory/Img5.webp"
+
+const proyectosExtra3 = [
+  { type: "img", src: Vanitory1, alt: "Vanitory Plego 1" },
+  { type: "img", src: Vanitory2, alt: "Vanitory Plego 2" },
+  { type: "img", src: Vanitory3, alt: "Vanitory Plego 3" },
+  { type: "img", src: Vanitory4, alt: "Vanitory Plego 4" },
+  { type: "img", src: Vanitory5, alt: "Vanitory Plego 5" },
+]
 
 /* ===== ESTADO / REFS ===== */
 const sectionRef = ref(null)
@@ -196,18 +294,19 @@ const onUserEnd = (idx) => {
   }, 900)
 }
 
-/* ===== LIGHTBOX ===== */
+/* ===== LIGHTBOX (IMG/VIDEO) ===== */
 const lightboxOpen = ref(false)
-const lightboxImg = ref(null)
+const lightboxItem = ref(null)
 
-const openLightbox = (img) => {
-  lightboxImg.value = img
+const openMedia = (item) => {
+  lightboxItem.value = item
   lightboxOpen.value = true
   stopAllAuto()
 }
 
 const closeLightbox = () => {
   lightboxOpen.value = false
+  lightboxItem.value = null
   startAllAuto()
 }
 
@@ -329,7 +428,7 @@ const stopAllAuto = () => {
 }
 
 /* ===== Scroll UX al colapsar ===== */
-const SCROLL_OFFSET = 90 // ajustá si tu navbar sticky tapa
+const SCROLL_OFFSET = 90
 const scrollToMainCarousel = () => {
   const el = mainCarouselRef.value
   if (!el) return
@@ -367,6 +466,16 @@ onMounted(async () => {
   await nextTick()
   scrollToIndex(0, 0, { smooth: false })
   startAuto(0)
+
+  // auto-play previews de videos (muted + loop) cuando aparecen
+  // (si querés ahorrar CPU, lo sacamos)
+  const playAllVisibleVideos = () => {
+    const vids = sectionRef.value?.querySelectorAll("video.project-media") || []
+    vids.forEach((v) => {
+      if (v.paused) v.play().catch(() => { })
+    })
+  }
+  setTimeout(playAllVisibleVideos, 250)
 
   observer = new IntersectionObserver(
     ([entry]) => {
@@ -440,12 +549,44 @@ onUnmounted(() => {
 }
 
 /* ==========================
+   BLOQUES EXTRA
+========================== */
+.extras-wrapper {
+  margin-top: 2.5rem;
+  display: grid;
+  gap: 3rem;
+}
+
+.extra-block {
+  display: grid;
+  gap: 1.2rem;
+}
+
+.extra-title {
+  margin: 0 auto;
+  width: min(1050px, 100%);
+  font-family: "Quicksand", sans-serif;
+  font-size: clamp(1.35rem, 2.2vw, 1.75rem);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(244, 200, 121, 0.92);
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.projects-wrapper.is-visible .extra-title {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ==========================
    CARRUSEL
 ========================== */
 .projects-shell {
   position: relative;
   max-width: 1050px;
-  margin: 0 auto 3rem;
+  margin: 0 auto 0;
   opacity: 0;
   transform: translateX(60px);
   transition: opacity 0.9s ease, transform 0.9s ease;
@@ -461,10 +602,8 @@ onUnmounted(() => {
   gap: 1.5rem;
   overflow-x: auto;
   padding: 0.75rem 0.25rem;
-
   scroll-snap-type: x mandatory;
   scroll-padding: 50%;
-
   -webkit-overflow-scrolling: touch;
   scroll-behavior: auto;
   overscroll-behavior-x: contain;
@@ -476,6 +615,7 @@ onUnmounted(() => {
 }
 
 .project-card {
+  position: relative;
   flex: 0 0 calc((100% - 3 * 1.5rem) / 4);
   scroll-snap-align: center;
   border-radius: 20px;
@@ -487,19 +627,20 @@ onUnmounted(() => {
   user-select: none;
 }
 
-.project-img {
+/* IMAGEN Y VIDEO: MISMA CLASE */
+.project-media {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  display: block;
   transition: transform 0.35s ease, filter 0.35s ease;
 }
 
-.project-card:hover .project-img {
+.project-card:hover .project-media {
   transform: scale(1.04);
   filter: brightness(1.05);
 }
 
-/* ocultar scrollbar */
 .projects-track::-webkit-scrollbar {
   display: none;
 }
@@ -509,7 +650,70 @@ onUnmounted(() => {
 }
 
 /* ==========================
-   BOTONES (premium)
+   BADGE PLAY PREMIUM (glass + dorado)
+========================== */
+.video-badge {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+opacity: 0.92;
+
+  width: 64px;
+  height: 64px;
+  border-radius: 22px;
+
+  display: grid;
+  place-items: center;
+
+  background: rgba(10, 10, 10, 0.55);
+  border: 1px solid rgba(244, 200, 121, 0.45);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  box-shadow:
+    0 18px 45px rgba(0, 0, 0, 0.65),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+
+  pointer-events: none;
+  transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+}
+
+
+
+
+.video-icon {
+  width: 26px;
+  height: 26px;
+  fill: rgba(244, 200, 121, 0.95);
+  filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.55));
+  transform: translateX(1px); /* centrado óptico del triángulo */
+}
+
+.project-card:hover .video-badge {
+  transform: translate(-50%, -50%) scale(1.04);
+  background: rgba(244, 200, 121, 0.1);
+  border-color: rgba(244, 200, 121, 0.6);
+}
+
+/* mobile friendly del badge */
+@media (max-width: 640px) {
+  .video-badge {
+    width: 48px;
+    height: 48px;
+    border-radius: 16px;
+    left: 12px;
+    bottom: 12px;
+  }
+
+  .video-icon {
+    width: 22px;
+    height: 22px;
+  }
+}
+
+/* ==========================
+   BOTONES
 ========================== */
 .nav-btn {
   position: absolute;
@@ -518,29 +722,19 @@ onUnmounted(() => {
   width: 46px;
   height: 46px;
   border-radius: 999px;
-
   border: 1px solid rgba(244, 200, 121, 0.28);
   background: rgba(8, 8, 8, 0.55);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-
   color: rgba(255, 245, 230, 0.92);
   cursor: pointer;
   z-index: 3;
-
   display: grid;
   place-items: center;
-
-  box-shadow:
-    0 18px 50px rgba(0, 0, 0, 0.72),
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.72),
     inset 0 0 0 1px rgba(255, 255, 255, 0.06);
-
-  transition:
-    transform 0.18s ease,
-    background 0.18s ease,
-    border-color 0.18s ease,
-    box-shadow 0.18s ease,
-    color 0.18s ease;
+  transition: transform 0.18s ease, background 0.18s ease, border-color 0.18s ease,
+    box-shadow 0.18s ease, color 0.18s ease;
 }
 
 .nav-btn::after {
@@ -564,9 +758,7 @@ onUnmounted(() => {
   border-color: rgba(244, 200, 121, 0.75);
   color: #0b0b0b;
   transform: translateY(-50%) scale(1.06);
-  box-shadow:
-    0 22px 65px rgba(0, 0, 0, 0.86),
-    0 0 0 6px rgba(244, 200, 121, 0.10);
+  box-shadow: 0 22px 65px rgba(0, 0, 0, 0.86), 0 0 0 6px rgba(244, 200, 121, 0.1);
 }
 
 .nav-btn:hover::after {
@@ -579,12 +771,9 @@ onUnmounted(() => {
 
 .nav-btn:focus-visible {
   outline: none;
-  box-shadow:
-    0 22px 65px rgba(0, 0, 0, 0.86),
-    0 0 0 4px rgba(244, 200, 121, 0.22);
+  box-shadow: 0 22px 65px rgba(0, 0, 0, 0.86), 0 0 0 4px rgba(244, 200, 121, 0.22);
 }
 
-/* adentro del carrusel */
 .nav-left {
   left: 10px;
 }
@@ -627,7 +816,8 @@ onUnmounted(() => {
   background: transparent;
   text-decoration: none;
   cursor: pointer;
-  transition: background 0.25s ease, color 0.25s ease, transform 0.2s ease, box-shadow 0.25s ease;
+  transition: background 0.25s ease, color 0.25s ease, transform 0.2s ease,
+    box-shadow 0.25s ease;
 }
 
 .cta-btn:hover {
@@ -635,15 +825,6 @@ onUnmounted(() => {
   color: #050505;
   transform: translateY(-1px);
   box-shadow: 0 18px 40px rgba(0, 0, 0, 0.9);
-}
-
-/* ==========================
-   EXTRAS
-========================== */
-.extras-wrapper {
-  margin-top: 2.5rem;
-  display: grid;
-  gap: 2.2rem;
 }
 
 /* ==========================
@@ -718,7 +899,6 @@ onUnmounted(() => {
     opacity: 0;
     transform: translateY(10px) scale(0.97);
   }
-
   to {
     opacity: 1;
     transform: translateY(0) scale(1);
@@ -765,3 +945,4 @@ onUnmounted(() => {
   }
 }
 </style>
+

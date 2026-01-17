@@ -38,14 +38,17 @@ import hafele from "@/assets/Img/Marcas/HAFELE.png";
 import egger from "@/assets/Img/Marcas/EGGER.png";
 import eurohard from "@/assets/Img/Marcas/EUROHARD.png";
 import greenwey from "@/assets/Img/Marcas/GREENWEY.png";
+import milwaukee from "@/assets/Img/Marcas/Milwaukee.png";
+
 
 const marcas = [
   { nombre: "Faplac", logo: faplac },
   { nombre: "Häfele", logo: hafele },
-  { nombre: "Egger", logo: egger, boost: true },      // 👈 necesita lectura
+  { nombre: "Egger", logo: egger, boost: true },
   { nombre: "Eurohard", logo: eurohard },
-  { nombre: "Greenwey", logo: greenwey, boost: true } // 👈 necesita lectura
-];
+  { nombre: "Greenwey", logo: greenwey, boost: true },
+  { nombre: "Milwaukee", logo: milwaukee, boost: true },
+]
 
 /* ==== Animación on-scroll con IntersectionObserver ==== */
 const sectionRef = ref(null);
