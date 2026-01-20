@@ -15,5 +15,16 @@ import Logos from '@/components/Logos.vue'
 
 html {
   scroll-behavior: smooth;
+  overflow-x: clip; /* ✅ mata el scroll horizontal fantasma */
 }
+
+body {
+  overflow-x: clip; /* ✅ idem */
+  width: 100%;
+}
+html, body {
+  width: 100%;
+  overflow-x: hidden;
+}
+
 </style>

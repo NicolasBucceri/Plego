@@ -391,9 +391,35 @@ onBeforeUnmount(() => {
     padding: 4.5rem 0 4rem;
   }
 
+  /* más aire lateral global (opcional pero queda premium) */
+  .container {
+    padding: 0 1.25rem; /* antes 1.5rem */
+  }
+
   .work-grid {
     grid-template-columns: 1fr;
     gap: 2rem;
+    justify-items: center; /* 🔥 centra los items del grid */
+  }
+
+  .work-item {
+    max-width: 520px;        /* 🔥 deja de limitarlo a 260px */
+    width: 100%;
+    margin: 0 auto;          /* 🔥 centra el bloque */
+    text-align: center;      /* 🔥 centra textos */
+    padding: 0 0.25rem;      /* micro padding para que respire */
+  }
+
+  .item-text {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 34ch;         /* 🔥 ancho de lectura lindo */
+  }
+
+  .item-line {
+    width: min(420px, 100%); /* 🔥 línea más “controlada” */
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .work-title {
@@ -404,4 +430,5 @@ onBeforeUnmount(() => {
     width: 260px;
   }
 }
+
 </style>

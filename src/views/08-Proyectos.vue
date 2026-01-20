@@ -11,16 +11,24 @@
       </header>
 
       <!-- =========================
-           CARRUSEL PRINCIPAL (NO TOCAR)
+           CARRUSEL PRINCIPAL
       ========================== -->
       <div ref="mainCarouselRef" class="projects-shell" @mouseenter="pauseAuto(0)" @mouseleave="resumeAuto(0)">
         <button class="nav-btn nav-left" @click="prev(0)" aria-label="Ver proyectos anteriores">
           <i class="fas fa-chevron-left"></i>
         </button>
 
-        <div ref="track0" class="projects-track" :class="{ 'is-dragging': isUserInteracting }"
-          @scroll="onTrackScroll(0)" @pointerdown="onUserStart(0)" @pointerup="onUserEnd(0)"
-          @pointercancel="onUserEnd(0)" @touchstart.passive="onUserStart(0)" @touchend="onUserEnd(0)">
+        <div
+          ref="track0"
+          class="projects-track"
+          :class="{ 'is-dragging': isUserInteracting }"
+          @scroll="onTrackScroll(0)"
+          @pointerdown="onUserStart(0)"
+          @pointerup="onUserEnd(0)"
+          @pointercancel="onUserEnd(0)"
+          @touchstart.passive="onUserStart(0)"
+          @touchend="onUserEnd(0)"
+        >
           <article v-for="(item, i) in proyectos" :key="`main-${i}`" class="project-card" @click="openMedia(item)">
             <img :src="item.src" :alt="item.alt" class="project-media" loading="lazy" />
           </article>
@@ -31,111 +39,68 @@
         </button>
       </div>
 
-      <!-- CTA ARRIBA: SOLO CUANDO NO ESTÁ ABIERTO -->
+      <!-- CTA ARRIBA -->
       <div v-if="!showMore" class="cta-wrapper">
         <button class="cta-btn" type="button" @click="toggleMas">Descubrí más</button>
       </div>
 
       <!-- =========================
-           3 CARRUSELES EXTRA (VIDEO EN LA MISMA CARD)
+           EXTRAS (HIJO)
       ========================== -->
       <transition name="fade-slide">
         <div v-if="showMore" class="extras-wrapper">
-          <!-- ================== EXTRA 1: PLACARES ================== -->
-          <div class="extra-block">
-            <h3 class="extra-title">Placares</h3>
+          <CarruselesProyectos
+            title="Placares"
+            :items="proyectosExtra1"
+            :idx="1"
+            uid="placares"
+            :isDragging="isUserInteracting"
+            @trackReady="onTrackReady"
+            @prev="prev"
+            @next="next"
+            @pause="pauseAuto"
+            @resume="resumeAuto"
+            @scroll="onTrackScroll"
+            @userStart="onUserStart"
+            @userEnd="onUserEnd"
+            @open="openMedia"
+          />
 
-            <div class="projects-shell" @mouseenter="pauseAuto(1)" @mouseleave="resumeAuto(1)">
-              <button class="nav-btn nav-left" @click="prev(1)" aria-label="Anterior">
-                <i class="fas fa-chevron-left"></i>
-              </button>
+          <CarruselesProyectos
+            title="Cocina"
+            :items="proyectosExtra2"
+            :idx="2"
+            uid="cocina"
+            :isDragging="isUserInteracting"
+            @trackReady="onTrackReady"
+            @prev="prev"
+            @next="next"
+            @pause="pauseAuto"
+            @resume="resumeAuto"
+            @scroll="onTrackScroll"
+            @userStart="onUserStart"
+            @userEnd="onUserEnd"
+            @open="openMedia"
+          />
 
-              <div ref="track1" class="projects-track" :class="{ 'is-dragging': isUserInteracting }"
-                @scroll="onTrackScroll(1)" @pointerdown="onUserStart(1)" @pointerup="onUserEnd(1)"
-                @pointercancel="onUserEnd(1)" @touchstart.passive="onUserStart(1)" @touchend="onUserEnd(1)">
-                <article v-for="(item, i) in proyectosExtra1" :key="`extra1-${i}`" class="project-card"
-                  @click="openMedia(item)">
-                  <img v-if="item.type === 'img'" :src="item.src" :alt="item.alt" class="project-media"
-                    loading="lazy" />
-                  <video v-else class="project-media" :src="item.src" muted loop playsinline preload="metadata"></video>
+          <CarruselesProyectos
+            title="Vanitory"
+            :items="proyectosExtra3"
+            :idx="3"
+            uid="vanitory"
+            :isDragging="isUserInteracting"
+            @trackReady="onTrackReady"
+            @prev="prev"
+            @next="next"
+            @pause="pauseAuto"
+            @resume="resumeAuto"
+            @scroll="onTrackScroll"
+            @userStart="onUserStart"
+            @userEnd="onUserEnd"
+            @open="openMedia"
+          />
 
-                  <span v-if="item.type === 'video'" class="video-badge" aria-hidden="true">
-  <svg viewBox="0 0 24 24" class="video-icon">
-    <path d="M8 5v14l11-7z" />
-  </svg>
-</span>
-
-                </article>
-              </div>
-
-              <button class="nav-btn nav-right" @click="next(1)" aria-label="Siguiente">
-                <i class="fas fa-chevron-right"></i>
-              </button>
-            </div>
-          </div>
-
-          <!-- ================== EXTRA 2: COCINA ================== -->
-          <div class="extra-block">
-            <h3 class="extra-title">Cocina</h3>
-
-            <div class="projects-shell" @mouseenter="pauseAuto(2)" @mouseleave="resumeAuto(2)">
-              <button class="nav-btn nav-left" @click="prev(2)" aria-label="Anterior">
-                <i class="fas fa-chevron-left"></i>
-              </button>
-
-              <div ref="track2" class="projects-track" :class="{ 'is-dragging': isUserInteracting }"
-                @scroll="onTrackScroll(2)" @pointerdown="onUserStart(2)" @pointerup="onUserEnd(2)"
-                @pointercancel="onUserEnd(2)" @touchstart.passive="onUserStart(2)" @touchend="onUserEnd(2)">
-                <article v-for="(item, i) in proyectosExtra2" :key="`extra2-${i}`" class="project-card"
-                  @click="openMedia(item)">
-                  <img v-if="item.type === 'img'" :src="item.src" :alt="item.alt" class="project-media"
-                    loading="lazy" />
-                  <video v-else class="project-media" :src="item.src" muted loop playsinline preload="metadata"></video>
-
-                  <span v-if="item.type === 'video'" class="video-badge" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" class="video-icon">
-                      <path d="M8 5v14l11-7z" />
-                    </svg>
-                  </span>
-
-                </article>
-              </div>
-
-              <button class="nav-btn nav-right" @click="next(2)" aria-label="Siguiente">
-                <i class="fas fa-chevron-right"></i>
-              </button>
-            </div>
-          </div>
-
-          <!-- ================== EXTRA 3: VANITORY ================== -->
-          <div class="extra-block">
-            <h3 class="extra-title">Vanitory</h3>
-
-            <div class="projects-shell" @mouseenter="pauseAuto(3)" @mouseleave="resumeAuto(3)">
-              <button class="nav-btn nav-left" @click="prev(3)" aria-label="Anterior">
-                <i class="fas fa-chevron-left"></i>
-              </button>
-
-              <div ref="track3" class="projects-track" :class="{ 'is-dragging': isUserInteracting }"
-                @scroll="onTrackScroll(3)" @pointerdown="onUserStart(3)" @pointerup="onUserEnd(3)"
-                @pointercancel="onUserEnd(3)" @touchstart.passive="onUserStart(3)" @touchend="onUserEnd(3)">
-                <article v-for="(item, i) in proyectosExtra3" :key="`extra3-${i}`" class="project-card"
-                  @click="openMedia(item)">
-                  <img v-if="item.type === 'img'" :src="item.src" :alt="item.alt" class="project-media"
-                    loading="lazy" />
-                  <video v-else class="project-media" :src="item.src" muted loop playsinline preload="metadata"></video>
-
-                  <span v-if="item.type === 'video'" class="video-badge">▶</span>
-                </article>
-              </div>
-
-              <button class="nav-btn nav-right" @click="next(3)" aria-label="Siguiente">
-                <i class="fas fa-chevron-right"></i>
-              </button>
-            </div>
-          </div>
-
-          <!-- ✅ CTA ABAJO DEL TODO -->
+          <!-- CTA ABAJO -->
           <div class="cta-wrapper cta-wrapper--bottom">
             <button class="cta-btn" type="button" @click="toggleMas">Mostrar menos</button>
           </div>
@@ -143,13 +108,12 @@
       </transition>
     </div>
 
-    <!-- LIGHTBOX (IMG O VIDEO) -->
+    <!-- LIGHTBOX -->
     <div v-if="lightboxOpen" class="lightbox-backdrop" @click.self="closeLightbox">
       <button class="lightbox-close" @click="closeLightbox" aria-label="Cerrar">×</button>
 
       <div class="lightbox-content">
-        <img v-if="lightboxItem?.type === 'img'" :src="lightboxItem.src" class="lightbox-img"
-          alt="Contenido ampliado" />
+        <img v-if="lightboxItem?.type === 'img'" :src="lightboxItem.src" class="lightbox-img" alt="Contenido ampliado" />
         <video v-else :src="lightboxItem?.src" class="lightbox-img" controls autoplay playsinline></video>
       </div>
     </div>
@@ -158,6 +122,7 @@
 
 <script setup>
 import { ref, onMounted, onUnmounted, nextTick } from "vue"
+import CarruselesProyectos from "@/components/CarruselesProyectos.vue"
 
 /* ===== IMÁGENES PRINCIPAL ===== */
 import Carrusel1 from "@/assets/Img/ProyectosCarrusel/CarruselProyectos1.jpg"
@@ -272,6 +237,14 @@ const track1 = ref(null)
 const track2 = ref(null)
 const track3 = ref(null)
 const tracks = [track0, track1, track2, track3]
+
+/* El hijo me pasa el track real para track1/2/3 */
+const onTrackReady = ({ idx, el }) => {
+  if (!el) return
+  if (idx === 1) track1.value = el
+  if (idx === 2) track2.value = el
+  if (idx === 3) track3.value = el
+}
 
 /* ===== INDICES (4 carruseles) ===== */
 const currentIndex = ref([0, 0, 0, 0])
@@ -451,7 +424,6 @@ const toggleMas = async () => {
     stopAuto(1)
     stopAuto(2)
     stopAuto(3)
-
     await nextTick()
     scrollToMainCarousel()
   }
@@ -466,16 +438,6 @@ onMounted(async () => {
   await nextTick()
   scrollToIndex(0, 0, { smooth: false })
   startAuto(0)
-
-  // auto-play previews de videos (muted + loop) cuando aparecen
-  // (si querés ahorrar CPU, lo sacamos)
-  const playAllVisibleVideos = () => {
-    const vids = sectionRef.value?.querySelectorAll("video.project-media") || []
-    vids.forEach((v) => {
-      if (v.paused) v.play().catch(() => { })
-    })
-  }
-  setTimeout(playAllVisibleVideos, 250)
 
   observer = new IntersectionObserver(
     ([entry]) => {
@@ -498,7 +460,8 @@ onUnmounted(() => {
 })
 </script>
 
-<style scoped>
+<!-- ✅ CLAVE: SIN scoped -->
+<style>
 /* ==========================
    WRAPPER
 ========================== */
@@ -586,7 +549,8 @@ onUnmounted(() => {
 .projects-shell {
   position: relative;
   max-width: 1050px;
-  margin: 0 auto 0;
+  width: 100%;
+  margin: 0 auto;
   opacity: 0;
   transform: translateX(60px);
   transition: opacity 0.9s ease, transform 0.9s ease;
@@ -599,6 +563,7 @@ onUnmounted(() => {
 
 .projects-track {
   display: flex;
+  width: 100%;
   gap: 1.5rem;
   overflow-x: auto;
   padding: 0.75rem 0.25rem;
@@ -627,7 +592,6 @@ onUnmounted(() => {
   user-select: none;
 }
 
-/* IMAGEN Y VIDEO: MISMA CLASE */
 .project-media {
   width: 100%;
   height: 100%;
@@ -650,66 +614,41 @@ onUnmounted(() => {
 }
 
 /* ==========================
-   BADGE PLAY PREMIUM (glass + dorado)
+   BADGE PLAY
 ========================== */
 .video-badge {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-opacity: 0.92;
-
+  opacity: 0.92;
   width: 64px;
   height: 64px;
   border-radius: 22px;
-
   display: grid;
   place-items: center;
-
   background: rgba(10, 10, 10, 0.55);
   border: 1px solid rgba(244, 200, 121, 0.45);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-
-  box-shadow:
-    0 18px 45px rgba(0, 0, 0, 0.65),
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.65),
     inset 0 0 0 1px rgba(255, 255, 255, 0.05);
-
   pointer-events: none;
   transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
 }
-
-
-
 
 .video-icon {
   width: 26px;
   height: 26px;
   fill: rgba(244, 200, 121, 0.95);
   filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.55));
-  transform: translateX(1px); /* centrado óptico del triángulo */
+  transform: translateX(1px);
 }
 
 .project-card:hover .video-badge {
   transform: translate(-50%, -50%) scale(1.04);
   background: rgba(244, 200, 121, 0.1);
   border-color: rgba(244, 200, 121, 0.6);
-}
-
-/* mobile friendly del badge */
-@media (max-width: 640px) {
-  .video-badge {
-    width: 48px;
-    height: 48px;
-    border-radius: 16px;
-    left: 12px;
-    bottom: 12px;
-  }
-
-  .video-icon {
-    width: 22px;
-    height: 22px;
-  }
 }
 
 /* ==========================
@@ -737,17 +676,6 @@ opacity: 0.92;
     box-shadow 0.18s ease, color 0.18s ease;
 }
 
-.nav-btn::after {
-  content: "";
-  position: absolute;
-  inset: -10px;
-  border-radius: inherit;
-  background: radial-gradient(circle, rgba(244, 200, 121, 0.18), transparent 60%);
-  opacity: 0;
-  transition: opacity 0.18s ease;
-  pointer-events: none;
-}
-
 .nav-btn i {
   font-size: 0.95rem;
   transition: transform 0.18s ease;
@@ -761,26 +689,12 @@ opacity: 0.92;
   box-shadow: 0 22px 65px rgba(0, 0, 0, 0.86), 0 0 0 6px rgba(244, 200, 121, 0.1);
 }
 
-.nav-btn:hover::after {
-  opacity: 1;
-}
-
 .nav-btn:active {
   transform: translateY(-50%) scale(0.98);
 }
 
-.nav-btn:focus-visible {
-  outline: none;
-  box-shadow: 0 22px 65px rgba(0, 0, 0, 0.86), 0 0 0 4px rgba(244, 200, 121, 0.22);
-}
-
-.nav-left {
-  left: 10px;
-}
-
-.nav-right {
-  right: 10px;
-}
+.nav-left { left: 10px; }
+.nav-right { right: 10px; }
 
 /* ==========================
    CTA
@@ -895,46 +809,33 @@ opacity: 0.92;
 }
 
 @keyframes lightbox-in {
-  from {
-    opacity: 0;
-    transform: translateY(10px) scale(0.97);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
+  from { opacity: 0; transform: translateY(10px) scale(0.97); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
 }
 
 /* ==========================
    RESPONSIVE
 ========================== */
 @media (max-width: 1024px) {
-  .project-card {
-    flex: 0 0 calc((100% - 1.5rem) / 2);
-  }
-
-  .nav-left {
-    left: 8px;
-  }
-
-  .nav-right {
-    right: 8px;
-  }
+  .projects-track { scroll-padding: 0; }
+  .project-card { flex: 0 0 calc((100% - 1.5rem) / 2); }
+  .nav-left { left: 8px; }
+  .nav-right { right: 8px; }
 }
 
 @media (max-width: 640px) {
-  .projects-wrapper {
-    padding: 4.5rem 0 4rem;
+  .projects-wrapper { padding: 4.5rem 0 4rem; }
+
+  .projects-track {
+    scroll-padding: 0;
+    gap: 1rem;
+    padding-left: 10vw;
+    padding-right: 10vw;
   }
 
-  .project-card {
-    flex: 0 0 80vw;
-  }
+  .project-card { flex: 0 0 80vw; }
 
-  .nav-btn {
-    width: 40px;
-    height: 40px;
-  }
+  .nav-btn { width: 40px; height: 40px; }
 
   .lightbox-close {
     top: 1rem;
@@ -943,6 +844,17 @@ opacity: 0.92;
     height: 34px;
     font-size: 1.3rem;
   }
+
+  .video-badge {
+    width: 48px;
+    height: 48px;
+    border-radius: 16px;
+    top: auto;
+    left: 12px;
+    bottom: 12px;
+    transform: none;
+  }
+
+  .video-icon { width: 22px; height: 22px; }
 }
 </style>
-

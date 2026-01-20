@@ -44,7 +44,7 @@ const features = [
   {
     title: "Diseño",
     icon: "fas fa-pencil-ruler",
-    text: "Diseños exclusivos desarrollados a medida para potenciar cada espacio."
+    text: "Diseños exclusivos desarrollados a medida para potenciar cada espacio, combinando funcionalidad, estética y calidad"
   },
   {
     title: "Terminaciones",

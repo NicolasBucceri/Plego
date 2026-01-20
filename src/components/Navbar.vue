@@ -8,17 +8,11 @@
       </RouterLink>
 
       <!-- TOGGLER MOBILE -->
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarScroll"
-        aria-controls="navbarScroll"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
+      <button class="navbar-toggler" type="button" aria-controls="navbarScroll"
+        :aria-expanded="isOpen ? 'true' : 'false'" aria-label="Toggle navigation" @click="toggleMenu">
         <span class="navbar-toggler-icon"></span>
       </button>
+
 
       <!-- MENÚ -->
       <div class="collapse navbar-collapse" id="navbarScroll">
@@ -63,22 +57,65 @@
 </template>
 
 <script setup>
-import { RouterLink } from "vue-router";
+import { ref, onMounted } from "vue";
+import { RouterLink, useRouter } from "vue-router";
 import logoPlego from "@/assets/Img/Logo.png";
+
+const isOpen = ref(false);
+
+const getCollapse = () => {
+  const el = document.getElementById("navbarScroll");
+  if (!el || !window.bootstrap) return null;
+  return window.bootstrap.Collapse.getOrCreateInstance(el, { toggle: false });
+};
+
+const toggleMenu = () => {
+  const el = document.getElementById("navbarScroll");
+  const instance = getCollapse();
+  if (!el || !instance) return;
+
+  if (el.classList.contains("show")) {
+    instance.hide();
+  } else {
+    instance.show();
+  }
+};
 
 const closeMenu = () => {
   const el = document.getElementById("navbarScroll");
-  if (el && el.classList.contains("show")) el.classList.remove("show");
+  const instance = getCollapse();
+  if (!el || !instance) return;
+  instance.hide();
 };
+
+const router = useRouter();
+router.afterEach(() => closeMenu());
+
+onMounted(() => {
+  const el = document.getElementById("navbarScroll");
+  if (!el) return;
+
+  el.addEventListener("shown.bs.collapse", () => (isOpen.value = true));
+  el.addEventListener("hidden.bs.collapse", () => (isOpen.value = false));
+});
 </script>
+
+
+
 
 <style scoped>
 .navbar-plego {
-  height: var(--nav-height);
+  min-height: var(--nav-height);
+  height: auto;
+  /* ← clave */
   display: flex;
   align-items: center;
   background-color: #0C0C11 !important;
+  position: sticky;
+  top: 0;
+  z-index: 9999;
 }
+
 
 /* LOGO */
 .logo-img {
@@ -88,7 +125,7 @@ const closeMenu = () => {
   cursor: default !important;
   pointer-events: none;
   user-select: none;
-  filter: drop-shadow(0px 0px 4px rgba(0,0,0,0.4));
+  filter: drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.4));
 }
 
 /* NAV LINKS */
@@ -100,7 +137,8 @@ const closeMenu = () => {
   font-weight: 600;
   color: #ffffff !important;
   padding-bottom: 5px;
-  letter-spacing: 0.14em; /* look premium */
+  letter-spacing: 0.14em;
+  /* look premium */
   transition: color 0.3s ease;
 }
 
@@ -130,6 +168,11 @@ const closeMenu = () => {
     gap: 1rem;
     text-align: center;
     padding-top: 1rem;
+  }
+
+  .navbar-collapse {
+    background-color: #0C0C11;
+    padding: 1rem 0;
   }
 }
 </style>

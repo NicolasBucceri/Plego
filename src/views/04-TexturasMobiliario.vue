@@ -504,44 +504,45 @@ onMounted(() => {
    RESPONSIVE
 =============================================== */
 @media (max-width: 1024px) {
-    .texturas-hero {
-        padding: 3.5rem 1.25rem;
-    }
+  .texturas-hero {
+    padding: 3.5rem 1.25rem;
+  }
 
-    .texturas-split {
-        grid-template-columns: 1fr;
-        gap: 2.6rem;
-    }
+  .texturas-split {
+    grid-template-columns: 1fr;
+    gap: 2.2rem;
+  }
 
-    .texturas-preview {
-        order: -1;
-    }
+  /* ✅ Panel arriba, video abajo */
+  .texturas-panel { order: 0; }
+  .texturas-preview { order: 1; }
 
-    .preview-frame {
-        max-width: 420px;
-        margin: 0 auto;
-    }
+  .preview-frame {
+    max-width: 420px;
+    margin: 0 auto;
+  }
 
-    .texturas-title {
-        align-items: center;
-        text-align: center;
-    }
+  .texturas-title {
+    align-items: center;
+    text-align: center;
+  }
 
-    .texturas-subtitle {
-        margin: 0 auto;
-        text-align: center;
-    }
+  .texturas-subtitle {
+    margin: 0 auto;
+    text-align: center;
+  }
 
-    .texturas-swatches-grid {
-        margin: 0 auto;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
+  .texturas-swatches-grid {
+    margin: 0 auto;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
 
-    .texturas-helper {
-        text-align: center;
-        margin: 0 auto;
-    }
+  .texturas-helper {
+    text-align: center;
+    margin: 0 auto;
+  }
 }
+
 
 @media (max-width: 520px) {
     .texturas-swatches-grid {
