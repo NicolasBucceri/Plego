@@ -69,15 +69,15 @@ export default {
     slides: {
       type: Array,
       default: () => [
-        { src: "@/assets/Img/BannerSolucionesMedida/Banner4.png", alt: "Cocina moderna 1" },
-        { src: "@/assets/Img/BannerSolucionesMedida/Banner5.png", alt: "Cocina moderna 2" },
-        { src: "@/assets/Img/BannerSolucionesMedida/Banner6.png", alt: "Cocina moderna 3" },
+        { src: "@/assets/Img/BannerSolucionesMedida/BannerSolucion1.webp", alt: "Cocina moderna 1" },
+        { src: "@/assets/Img/BannerSolucionesMedida/BannerSolucion2.webp", alt: "Cocina moderna 2" },
+        { src: "@/assets/Img/BannerSolucionesMedida/BannerSolucion3.webp", alt: "Cocina moderna 3" },
       ],
     },
   },
   data() {
     return {
-      hoverTarget: null, // ahora es 0/1 en vez de "design/devs"
+      hoverTarget: null,
       whatsappNumber: "5491155798761",
       hasAnimated: false,
     };
@@ -173,8 +173,6 @@ export default {
   height: 100%;
   object-fit: cover;
   object-position: center;
-
-  /* ayuda a evitar “parpadeos” al cargar */
   transform: translateZ(0);
 }
 
@@ -186,8 +184,6 @@ export default {
     rgba(0, 0, 0, 0.45),
     rgba(0, 0, 0, 0.82)
   );
-
-  /* capa estable para que el blur tenga “algo” detrás */
   transform: translateZ(0);
 }
 
@@ -323,12 +319,10 @@ export default {
 .circle-label-uno,
 .circle-label-dev {
   font-family: 'Quicksand', sans-serif;
-
   display: block;
   width: 100%;
   text-align: center;
   margin-inline: auto;
-
   font-size: clamp(1.05rem, 1.05vw, 1.2rem) !important;
   line-height: 1.35;
   letter-spacing: 0.12em;
@@ -342,34 +336,26 @@ export default {
 ========================= */
 .plego-circle-btn {
   position: relative;
-  width: clamp(310px, 28vw, 370px); /* un poquito más chico */
+  width: clamp(310px, 28vw, 370px);
   aspect-ratio: 1 / 1;
   border-radius: 50%;
   border: none;
-
   background: rgba(255, 255, 255, 0.075);
-
-  /* blur estable */
   backdrop-filter: blur(28px) saturate(1.25) brightness(1.08);
   -webkit-backdrop-filter: blur(28px) saturate(1.25) brightness(1.08);
-
   color: var(--plego-text);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
   gap: 0.6rem;
   cursor: pointer;
   overflow: hidden;
   padding: 1.5rem;
   isolation: isolate;
   text-align: center;
-
-  /* ✅ fix “a veces no toma blur”: fuerza capa */
   transform: translateZ(0);
   will-change: transform, backdrop-filter;
-
   box-shadow: 0 18px 40px rgba(0, 0, 0, 0.65);
   transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
 }
@@ -403,7 +389,6 @@ export default {
   }
 }
 
-/* Línea separadora */
 .circle-separator {
   width: 45%;
   height: 1px;
@@ -414,7 +399,6 @@ export default {
   transition: opacity 0.35s ease, transform 0.35s ease;
 }
 
-/* Texto descriptivo */
 .circle-copy {
   font-size: clamp(0.85rem, 0.9vw, 1rem);
   text-align: center;
@@ -517,8 +501,6 @@ export default {
   .plego-circle-btn {
     width: clamp(235px, 82vw, 315px);
     padding: 1.35rem;
-
-    /* blur también en mobile (mismos valores base) */
     backdrop-filter: blur(28px) saturate(1.3) brightness(1.08);
     -webkit-backdrop-filter: blur(28px) saturate(1.3) brightness(1.08);
   }
@@ -534,7 +516,6 @@ export default {
   .orbit-trail { width: 92%; height: 92%; }
 }
 
-/* Pantallas bajitas */
 @media (max-height: 740px) {
   .plego-soluciones-section {
     height: auto;

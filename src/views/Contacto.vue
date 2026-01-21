@@ -23,7 +23,6 @@
 
             <!-- CHANNELS -->
             <section class="channels" aria-label="Canales de contacto">
-                <!-- WhatsApp -->
                 <article class="card" :class="{ 'is-visible': isVisible }">
                     <div class="card-top">
                         <div class="icon-badge" aria-hidden="true">
@@ -56,7 +55,6 @@
                     </div>
                 </article>
 
-                <!-- Instagram -->
                 <article class="card" :class="{ 'is-visible': isVisible }">
                     <div class="card-top">
                         <div class="icon-badge" aria-hidden="true">
@@ -89,7 +87,6 @@
                     </div>
                 </article>
 
-                <!-- TikTok -->
                 <article class="card" :class="{ 'is-visible': isVisible }">
                     <div class="card-top">
                         <div class="icon-badge" aria-hidden="true">
@@ -122,7 +119,6 @@
                     </div>
                 </article>
 
-                <!-- Mail -->
                 <article class="card" :class="{ 'is-visible': isVisible }">
                     <div class="card-top">
                         <div class="icon-badge" aria-hidden="true">
@@ -159,15 +155,12 @@
             <!-- LOCATIONS -->
             <section class="locations" aria-label="Ubicaciones">
                 <header class="section-head">
-                    <!-- si querés dorado acá:
-          <h2 class="section-title title-accent--gold">Ubicaciones</h2>
-          -->
                     <h2 class="section-title">Ubicaciones</h2>
                     <p class="section-subtitle">Dos puntos clave: donde se diseña y donde se fabrica.</p>
                 </header>
 
                 <div class="locations-grid">
-                    <!-- Castelar -->
+
                     <article class="location-card" :class="{ 'is-visible': isVisible }">
                         <div class="location-top">
                             <h3 class="location-title">Castelar — Taller</h3>
@@ -187,7 +180,6 @@
                         </div>
                     </article>
 
-                    <!-- Villa Devoto -->
                     <article class="location-card" :class="{ 'is-visible': isVisible }">
                         <div class="location-top">
                             <h3 class="location-title">Villa Devoto — Oficina</h3>
@@ -301,18 +293,11 @@ onBeforeUnmount(() => {
 </script>
 
 <style scoped>
-/* =========================
-   PLEGO CONTACT — UX/UI (FULL)
-   + TYPO SYSTEM (QUICKSAND)
-   ========================= */
-
-/* ✅ Base tipográfica global de esta vista */
 .contacto-view {
     font-family: 'Quicksand', sans-serif;
     text-rendering: geometricPrecision;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-
     position: relative;
     min-height: 100vh;
     overflow: hidden;
@@ -372,22 +357,18 @@ onBeforeUnmount(() => {
     transform: translateY(0);
 }
 
-/* ✅ Eyebrow — micro jerarquía premium */
 .eyebrow {
     font-family: 'Quicksand', sans-serif;
     display: inline-flex;
     align-items: center;
     gap: 10px;
-
     font-size: 0.86rem;
     font-weight: 600;
     letter-spacing: 0.16em;
     text-transform: uppercase;
-
     color: rgba(205, 160, 80, 0.9);
 }
 
-/* ✅ Title (H1) — jerarquía principal */
 .title {
     font-family: 'Quicksand', sans-serif;
 
@@ -400,13 +381,11 @@ onBeforeUnmount(() => {
     color: rgba(255, 255, 255, 0.94);
 }
 
-/* ===== ACCENT MARRÓN (mobiliario) ===== */
 .title-accent {
     --brown: #6F4E37;
     --core: rgba(111, 78, 55, 0.38);
     --soft: rgba(111, 78, 55, 0.22);
     --warm: rgba(255, 220, 160, 0.18);
-
     background: linear-gradient(90deg,
             rgba(111, 78, 55, 0.95),
             rgba(255, 220, 160, 0.92),
@@ -414,14 +393,12 @@ onBeforeUnmount(() => {
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-
     text-shadow:
         0 0 6px var(--core),
         0 0 14px var(--core),
         0 0 28px var(--soft),
         0 0 46px rgba(111, 78, 55, 0.18),
         0 0 18px var(--warm);
-
     filter: saturate(1.08) brightness(1.05);
     position: relative;
     white-space: nowrap;
@@ -429,7 +406,6 @@ onBeforeUnmount(() => {
 }
 
 @keyframes neonBrownPulse {
-
     0%,
     100% {
         text-shadow:
@@ -440,7 +416,6 @@ onBeforeUnmount(() => {
             0 0 16px rgba(255, 220, 160, 0.14);
         filter: saturate(1.06) brightness(1.03);
     }
-
     50% {
         text-shadow:
             0 0 8px rgba(111, 78, 55, 0.45),
@@ -452,7 +427,6 @@ onBeforeUnmount(() => {
     }
 }
 
-/* ===== ACCENT DORADO (para usar donde quieras, sin pisar el marrón) ===== */
 .title-accent--gold {
     --gold-core: rgba(205, 160, 80, 0.22);
 
@@ -463,7 +437,6 @@ onBeforeUnmount(() => {
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-
     text-shadow:
         0 0 6px var(--gold-core),
         0 0 14px var(--gold-core),
@@ -476,7 +449,6 @@ onBeforeUnmount(() => {
 }
 
 @keyframes neonGoldPulse {
-
     0%,
     100% {
         text-shadow:
@@ -486,7 +458,6 @@ onBeforeUnmount(() => {
             0 0 46px rgba(205, 160, 80, 0.22);
         filter: saturate(1.06);
     }
-
     50% {
         text-shadow:
             0 0 8px rgba(205, 160, 80, 0.22),
@@ -497,7 +468,6 @@ onBeforeUnmount(() => {
     }
 }
 
-/* accesibilidad */
 @media (prefers-reduced-motion: reduce) {
 
     .title-accent,
@@ -506,12 +476,10 @@ onBeforeUnmount(() => {
     }
 }
 
-/* ✅ Subtitle (Hero) — lectura pro */
 .subtitle {
     font-family: 'Quicksand', sans-serif;
     margin-top: 12px;
     max-width: 58ch;
-
     color: rgba(255, 255, 255, 0.70);
     font-size: 1.06rem;
     font-weight: 500;
@@ -529,7 +497,6 @@ onBeforeUnmount(() => {
     animation: shimmer 3.2s ease-in-out infinite;
 }
 
-/* CHANNELS GRID */
 .channels {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
@@ -537,24 +504,19 @@ onBeforeUnmount(() => {
     margin-top: 26px;
 }
 
-/* CARDS */
 .card {
     grid-column: span 6;
     border-radius: 18px;
     padding: 18px 18px 16px;
-
     background: rgba(255, 255, 255, 0.045);
     border: 1px solid rgba(255, 255, 255, 0.11);
     backdrop-filter: blur(12px);
-
     box-shadow: 0 18px 55px rgba(0, 0, 0, 0.50);
     position: relative;
     overflow: hidden;
-
     opacity: 0;
     transform: translateY(12px);
     transition: opacity 600ms ease, transform 600ms ease, border-color 350ms ease, box-shadow 350ms ease;
-
     display: flex;
     flex-direction: column;
     gap: 14px;
@@ -599,19 +561,15 @@ onBeforeUnmount(() => {
     display: grid;
     place-items: center;
     flex: 0 0 auto;
-
     position: relative;
     overflow: visible;
-
     color: #FFE3BF;
-
     background:
         radial-gradient(circle at 50% 40%,
             rgba(255, 220, 160, 0.20),
             var(--brown));
 
     border: 1px solid rgba(255, 220, 160, 0.42);
-
     box-shadow:
         0 0 14px var(--core),
         0 0 32px var(--soft),
@@ -638,7 +596,6 @@ onBeforeUnmount(() => {
     100% {
         filter: brightness(1) saturate(1.05);
     }
-
     50% {
         filter: brightness(1.25) saturate(1.35);
     }
@@ -648,7 +605,6 @@ onBeforeUnmount(() => {
     min-width: 0;
 }
 
-/* ✅ Card title (H2) */
 .card-title {
     font-family: 'Quicksand', sans-serif;
     font-size: 1.12rem;
@@ -658,7 +614,6 @@ onBeforeUnmount(() => {
     color: rgba(255, 255, 255, 0.94);
 }
 
-/* ✅ Card desc */
 .card-desc {
     font-family: 'Quicksand', sans-serif;
     margin: 6px 0 0;
@@ -686,7 +641,6 @@ onBeforeUnmount(() => {
     border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-/* ✅ info label/value jerarquizados */
 .info-label {
     font-family: 'Quicksand', sans-serif;
     color: rgba(255, 255, 255, 0.62);
@@ -725,26 +679,20 @@ onBeforeUnmount(() => {
     font-family: 'Quicksand', sans-serif;
     font-weight: 700;
     letter-spacing: 0.02em;
-
     width: 46px;
     height: 46px;
     border-radius: 14px;
-
     display: inline-flex;
     align-items: center;
     justify-content: center;
-
     font-size: 1.05rem;
     line-height: 1;
-
     background: rgba(255, 255, 255, 0.06);
     border: 1px solid rgba(255, 255, 255, 0.10);
     color: rgba(255, 255, 255, 0.92);
-
     cursor: pointer;
     user-select: none;
     text-decoration: none;
-
     transition: transform 180ms ease, border-color 220ms ease, box-shadow 220ms ease, background 220ms ease;
 }
 
@@ -761,36 +709,28 @@ onBeforeUnmount(() => {
     --brown: #6F4E37;
     --core: rgba(111, 78, 55, 0.45);
     --soft: rgba(111, 78, 55, 0.28);
-
     font-family: 'Quicksand', sans-serif;
     font-weight: 700;
     letter-spacing: 0.02em;
-
     width: 46px;
     height: 46px;
     border-radius: 14px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-
     position: relative;
     overflow: visible;
-
     color: #FFE3BF;
-
     background:
         radial-gradient(circle at 50% 38%,
             rgba(255, 220, 160, 0.22),
             var(--brown));
-
     border: 1px solid rgba(255, 220, 160, 0.42);
-
     box-shadow:
         0 0 14px var(--core),
         0 0 32px var(--soft),
         0 0 64px rgba(111, 78, 55, 0.22),
         0 16px 36px rgba(0, 0, 0, 0.65);
-
     transition: transform .18s ease, box-shadow .22s ease;
     animation: ctaPulse 2.8s ease-in-out infinite;
 }
@@ -844,7 +784,6 @@ onBeforeUnmount(() => {
     margin-bottom: 18px;
 }
 
-/* ✅ H2 Section title */
 .section-title {
     font-family: 'Quicksand', sans-serif;
     font-weight: 800;
@@ -854,13 +793,11 @@ onBeforeUnmount(() => {
     color: rgba(255, 255, 255, 0.94);
 }
 
-/* ✅ Section subtitle */
 .section-subtitle {
     font-family: 'Quicksand', sans-serif;
     font-weight: 500;
     font-size: 1rem;
     line-height: 1.6;
-
     position: relative;
     padding-left: 14px;
     border-left: 1px solid rgba(205, 160, 80, 0.22);
@@ -877,14 +814,11 @@ onBeforeUnmount(() => {
     grid-column: span 6;
     border-radius: 18px;
     padding: 18px;
-
     background: rgba(255, 255, 255, 0.045);
     border: 1px solid rgba(255, 255, 255, 0.11);
     backdrop-filter: blur(12px);
-
     box-shadow: 0 18px 55px rgba(0, 0, 0, 0.50);
     overflow: hidden;
-
     opacity: 0;
     transform: translateY(12px);
     transition: opacity 600ms ease, transform 600ms ease, border-color 350ms ease, box-shadow 350ms ease;
@@ -900,7 +834,6 @@ onBeforeUnmount(() => {
     box-shadow: 0 22px 75px rgba(0, 0, 0, 0.55);
 }
 
-/* ✅ H3 location title */
 .location-title {
     font-family: 'Quicksand', sans-serif;
     margin: 0;
@@ -910,7 +843,6 @@ onBeforeUnmount(() => {
     color: rgba(255, 255, 255, 0.94);
 }
 
-/* ✅ Location desc */
 .location-desc {
     font-family: 'Quicksand', sans-serif;
     margin: 8px 0 0;
@@ -947,7 +879,6 @@ onBeforeUnmount(() => {
     pointer-events: none;
 }
 
-/* CTA "Ver en Maps" */
 .location-actions {
     margin-top: 14px;
     display: flex;
@@ -958,28 +889,21 @@ onBeforeUnmount(() => {
     font-family: 'Quicksand', sans-serif;
     font-weight: 700;
     letter-spacing: 0.02em;
-
     position: relative;
     display: inline-flex;
     align-items: center;
     gap: 10px;
-
     padding: 10px 16px;
     border-radius: 14px;
-
     text-transform: none;
     font-size: 0.95rem;
-
     color: rgba(255, 255, 255, 0.92) !important;
-
     background: rgba(255, 255, 255, 0.06);
     border: 1px solid rgba(205, 160, 80, 0.35);
     backdrop-filter: blur(10px);
-
     box-shadow:
         0 10px 28px rgba(0, 0, 0, 0.35),
         inset 0 0 0 1px rgba(255, 255, 255, 0.06);
-
     transition: transform 180ms ease, border-color 220ms ease, box-shadow 220ms ease, background 220ms ease;
 }
 
@@ -1025,17 +949,14 @@ onBeforeUnmount(() => {
     transform: translateX(-50%) translateY(16px);
     opacity: 0;
     pointer-events: none;
-
     display: inline-flex;
     align-items: center;
     gap: 10px;
     padding: 12px 14px;
     border-radius: 14px;
-
     background: rgba(10, 10, 14, 0.72);
     border: 1px solid rgba(255, 255, 255, 0.10);
     backdrop-filter: blur(10px);
-
     box-shadow: 0 18px 60px rgba(0, 0, 0, 0.50);
     transition: opacity 220ms ease, transform 220ms ease;
     z-index: 50;

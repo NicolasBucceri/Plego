@@ -22,9 +22,9 @@ body {
   overflow-x: clip; /* ✅ idem */
   width: 100%;
 }
-html, body {
+/* html, body {
   width: 100%;
   overflow-x: hidden;
-}
+} */
 
 </style>

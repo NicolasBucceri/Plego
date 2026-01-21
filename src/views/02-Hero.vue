@@ -67,11 +67,11 @@
 
 <script setup>
 import { onMounted } from "vue";
-import banner1 from "@/assets/Img/BannerHero/Banner1Inicio.png";
-import banner2 from "@/assets/Img/BannerHero/Banner2Inicio.png";
-import banner3 from "@/assets/Img/BannerHero/Banner3Inicio.png";
-import banner4 from "@/assets/Img/BannerHero/Banner4Inicio.png";
-import banner5 from "@/assets/Img/BannerHero/Banner5Inicio.png";
+import banner1 from "@/assets/Img/BannerHero/Banner1Inicio.webp";
+import banner2 from "@/assets/Img/BannerHero/Banner2Inicio.webp";
+import banner3 from "@/assets/Img/BannerHero/Banner3Inicio.webp";
+import banner4 from "@/assets/Img/BannerHero/Banner4Inicio.webp";
+import banner5 from "@/assets/Img/BannerHero/Banner5Inicio.webp";
 
 
 import Lamparas3D from "@/components/Lamparas3D.vue";
@@ -203,7 +203,7 @@ onMounted(() => {
 
 
 /* ======================= */
-/* 🔥 ANIMACIONES */
+/*  ANIMACIONES */
 /* ======================= */
 
 .hero-animate .hero-title-inline {
@@ -261,7 +261,7 @@ onMounted(() => {
 }
 
 /* ======================= */
-/* ❌ BORRAR FLECHAS CARRUSEL */
+/* BORRAR FLECHAS CARRUSEL */
 /* ======================= */
 .carousel-control-prev,
 .carousel-control-next {

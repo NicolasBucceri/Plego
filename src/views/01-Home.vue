@@ -42,25 +42,25 @@ import SeccionSoluciones from '@/views/03-SolucionesMedeidas.vue'
 import TexturasSection from '@/views/04-TexturasMobiliario.vue'
 import NosotrosSection from '@/views/05-Nosotros.vue'
 import ComoTrabajamos from '@/views/06-ComoTrabajamos.vue'
-import NuestrosMuebles from '@/views/07-NuestrosMuebles.vue'
-import ProyectosCarrusel from '@/views/08-Proyectos.vue'
+import ProyectosCarrusel from '@/views/07-Proyectos.vue'
+import NuestrosMuebles from '@/views/08-NuestrosMuebles.vue'
 import Marcas from '@/views/09-Marcas.vue'
 
 
-import banner1 from "@/assets/Img/BannerHero/Banner1Inicio.png";
-import banner2 from "@/assets/Img/BannerHero/Banner2Inicio.png";
-import banner3 from "@/assets/Img/BannerHero/Banner3Inicio.png";
-import banner4 from "@/assets/Img/BannerHero/Banner4Inicio.png";
-import banner5 from "@/assets/Img/BannerHero/Banner5Inicio.png";
+import banner1 from "@/assets/Img/BannerHero/Banner1Inicio.webp";
+import banner2 from "@/assets/Img/BannerHero/Banner2Inicio.webp";
+import banner3 from "@/assets/Img/BannerHero/Banner3Inicio.webp";
+import banner4 from "@/assets/Img/BannerHero/Banner4Inicio.webp";
+import banner5 from "@/assets/Img/BannerHero/Banner5Inicio.webp";
 
-import solBanner4 from "@/assets/Img/BannerSolucionesMedidas/Banner4.png";
-import solBanner5 from "@/assets/Img/BannerSolucionesMedidas/Banner5.png";
-import solBanner6 from "@/assets/Img/BannerSolucionesMedidas/Banner6.png";
+import solBanner1 from "@/assets/Img/BannerSolucionesMedidas/BannerSolucion1.webp";
+import solBanner2 from "@/assets/Img/BannerSolucionesMedidas/BannerSolucion2.webp";
+import solBanner3 from "@/assets/Img/BannerSolucionesMedidas/BannerSolucion3.webp";
 
 const slidesSoluciones = [
-  { src: solBanner4, alt: "Cocina moderna 1" },
-  { src: solBanner5, alt: "Cocina moderna 2" },
-  { src: solBanner6, alt: "Cocina moderna 3" },
+  { src: solBanner1, alt: "Cocina moderna 1" },
+  { src: solBanner2, alt: "Cocina moderna 2" },
+  { src: solBanner3, alt: "Cocina moderna 3" },
 ];
 </script>
 

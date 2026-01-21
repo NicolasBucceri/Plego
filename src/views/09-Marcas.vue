@@ -50,7 +50,6 @@ const marcas = [
   { nombre: "Milwaukee", logo: milwaukee, boost: true },
 ]
 
-/* ==== Animación on-scroll con IntersectionObserver ==== */
 const sectionRef = ref(null);
 const isVisible = ref(false);
 let observer = null;
@@ -186,7 +185,6 @@ onBeforeUnmount(() => {
   transform: translateY(0);
 }
 
-/* Base logo */
 .brand-item img {
   max-width: 140px;
   max-height: 60px;
@@ -194,17 +192,11 @@ onBeforeUnmount(() => {
   transition: transform 0.3s ease, opacity 0.3s ease, filter 0.3s ease;
 }
 
-/* Hover fino */
 .brand-item:hover img {
   transform: translateY(-3px) scale(1.04);
   opacity: 0.95;
 }
 
-/* =========================================================
-   ✅ SOLUCIÓN: “solo lo negro se lee blanco” sin tocar colores
-   - Agrega un contorno/glow blanco MUY sutil
-   - SOLO a las marcas que lo necesitan (brand-boost)
-========================================================= */
 .brand-item.brand-boost img {
   filter:
     drop-shadow(0 0 1px rgba(255, 255, 255, 0.95)) drop-shadow(0 0 10px rgba(255, 255, 255, 0.18));

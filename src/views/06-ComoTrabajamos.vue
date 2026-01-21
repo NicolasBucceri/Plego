@@ -35,8 +35,6 @@
 <script setup>
 import { ref, onMounted, onBeforeUnmount } from 'vue'
 
-import bannerTrabajamos from "@/assets/Img/BannerTrabajamos.jpeg";
-
 /* PASOS DEL PROCESO */
 const pasos = [
   {
@@ -104,7 +102,6 @@ onBeforeUnmount(() => {
   background: #111;
   padding: 6rem 0 5.5rem;
   color: #f3eee5;
-  /* hueso */
 }
 
 /* ===========================
@@ -126,25 +123,20 @@ onBeforeUnmount(() => {
   transform: translateY(24px);
 }
 
-/* Separador elegante */
 .section-separator {
   position: relative;
   width: 360px;
   height: 12px;
   margin: 0 auto 2.8rem;
-
-  /* animación que ya usás */
   opacity: 0;
   transform: translateY(10px);
   transition: opacity 0.7s ease-out, transform 0.7s ease-out;
 }
 
-/* Línea dorada central */
 .section-separator::before {
   content: '';
   position: absolute;
   inset: 50% 0;
-  /* centra verticalmente */
   transform: translateY(-50%);
   height: 2px;
   border-radius: 999px;
@@ -154,7 +146,6 @@ onBeforeUnmount(() => {
       rgba(244, 200, 121, 0));
 }
 
-/* Glow suave alrededor (efecto LED) */
 .section-separator::after {
   content: '';
   position: absolute;
@@ -169,7 +160,6 @@ onBeforeUnmount(() => {
   opacity: 0.9;
   pointer-events: none;
 }
-
 
 .work-eyebrow {
   display: inline-block;
@@ -187,7 +177,6 @@ onBeforeUnmount(() => {
   font-weight: 400;
   color: #ffffff;
   margin: 0;
-  /* opcional si querés controlarlo mejor */
   line-height: 1.1;
 }
 
@@ -210,10 +199,8 @@ onBeforeUnmount(() => {
   flex-direction: column;
   max-width: 260px;
   padding-bottom: 1.5rem;
-
   transform: translateY(18px);
   opacity: 0;
-
   transition:
     transform 0.25s ease-out,
     opacity 0.25s ease-out;
@@ -223,7 +210,6 @@ onBeforeUnmount(() => {
   transform: translateY(6px);
 }
 
-/* Número */
 .number {
   font-size: 2.1rem;
   font-weight: 300;
@@ -232,7 +218,6 @@ onBeforeUnmount(() => {
   margin-bottom: 0.4rem;
 }
 
-/* Título paso */
 .item-title {
   font-size: 0.95rem;
   text-transform: uppercase;
@@ -242,7 +227,6 @@ onBeforeUnmount(() => {
   font-weight: 500;
 }
 
-/* Texto */
 .item-text {
   font-size: 0.93rem;
   line-height: 1.8;
@@ -250,7 +234,6 @@ onBeforeUnmount(() => {
   margin-bottom: 1.6rem;
 }
 
-/* Línea decorativa */
 .item-line {
   width: 100%;
   height: 1px;
@@ -264,9 +247,6 @@ onBeforeUnmount(() => {
 /* ===========================
    BANNER
    =========================== */
-/* ===========================
-   BANNER PANORÁMICO PREMIUM
-   =========================== */
 .banner-wrapper {
   width: 100%;
   max-width: 1400px;
@@ -274,24 +254,17 @@ onBeforeUnmount(() => {
   border-radius: 18px;
   overflow: hidden;
   position: relative;
-
-  /* franja panorámica, NO pantalla completa */
   aspect-ratio: 16 / 4;
-  /* probá 16/5 si la querés más finita */
   max-height: 420px;
   background: #000;
-  /* por si tarda en cargar */
-
   box-shadow: 0 18px 38px rgba(0, 0, 0, 0.55);
 }
 
-/* imagen siempre recortada al contenedor, sin crecer de más */
 .banner-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
-
   transform: scale(1.03);
   transition:
     transform 0.6s ease-out,
@@ -299,12 +272,10 @@ onBeforeUnmount(() => {
   filter: saturate(1.05) contrast(1.05);
 }
 
-/* ligero zoom al hover, bien sutil */
 .banner-wrapper:hover .banner-img {
   transform: scale(1.06);
 }
 
-/* degradado muy suave en los bordes para que “se funda” con el fondo */
 .banner-wrapper::after {
   content: "";
   position: absolute;
@@ -391,33 +362,32 @@ onBeforeUnmount(() => {
     padding: 4.5rem 0 4rem;
   }
 
-  /* más aire lateral global (opcional pero queda premium) */
   .container {
-    padding: 0 1.25rem; /* antes 1.5rem */
+    padding: 0 1.25rem;
   }
 
   .work-grid {
     grid-template-columns: 1fr;
     gap: 2rem;
-    justify-items: center; /* 🔥 centra los items del grid */
+    justify-items: center;
   }
 
   .work-item {
-    max-width: 520px;        /* 🔥 deja de limitarlo a 260px */
+    max-width: 520px;
     width: 100%;
-    margin: 0 auto;          /* 🔥 centra el bloque */
-    text-align: center;      /* 🔥 centra textos */
-    padding: 0 0.25rem;      /* micro padding para que respire */
+    margin: 0 auto;
+    text-align: center;
+    padding: 0 0.25rem;
   }
 
   .item-text {
     margin-left: auto;
     margin-right: auto;
-    max-width: 34ch;         /* 🔥 ancho de lectura lindo */
+    max-width: 34ch;
   }
 
   .item-line {
-    width: min(420px, 100%); /* 🔥 línea más “controlada” */
+    width: min(420px, 100%);
     margin-left: auto;
     margin-right: auto;
   }
@@ -430,5 +400,4 @@ onBeforeUnmount(() => {
     width: 260px;
   }
 }
-
 </style>

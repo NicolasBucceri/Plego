@@ -93,7 +93,6 @@ const goToWhatsApp = () => {
 }
 
 const handleSelect = (item) => {
-    // + Más texturas => WhatsApp
     if (item.tipo === "extra") {
         goToWhatsApp()
         return
@@ -102,14 +101,12 @@ const handleSelect = (item) => {
     texturaSeleccionada.value = item.id
     emit("select", item)
 
-    // Navega a la vista de acabado
     router.push({
         name: "acabado",
         params: { textura: item.id },
     })
 }
 
-/* Intersection Observer */
 const contentRef = ref(null)
 const isVisible = ref(false)
 
@@ -152,7 +149,6 @@ onMounted(() => {
     padding: 4rem 1.5rem;
 }
 
-/* Fondo */
 .texturas-bg {
     position: absolute;
     inset: 0;
@@ -163,7 +159,6 @@ onMounted(() => {
     z-index: 1;
 }
 
-/* Overlay */
 .texturas-overlay {
     position: absolute;
     inset: 0;
@@ -233,7 +228,6 @@ onMounted(() => {
     max-width: 1400px;
 }
 
-/* Estado inicial */
 .texturas-title,
 .texturas-subtitle,
 .texturas-swatches-grid,
@@ -243,7 +237,6 @@ onMounted(() => {
     transform: translateY(24px);
 }
 
-/* Visible */
 .texturas-content.is-visible .texturas-title,
 .texturas-content.is-visible .texturas-subtitle,
 .texturas-content.is-visible .texturas-swatches-grid,
@@ -293,7 +286,6 @@ onMounted(() => {
     padding: 0 clamp(0.2rem, 1vw, 0.8rem);
 }
 
-/* Panel izquierdo */
 .texturas-panel {
     display: flex;
     flex-direction: column;
@@ -341,7 +333,6 @@ onMounted(() => {
     border-radius: 999px;
 }
 
-/* Subtítulo */
 .texturas-subtitle {
     color: #e7e0d6;
     font-size: clamp(0.95rem, 1.2vw, 1.05rem);
@@ -430,7 +421,6 @@ onMounted(() => {
     color: #ffe3a6;
 }
 
-/* Helper */
 .texturas-helper {
     font-size: 0.85rem;
     color: #cbbfac;
@@ -440,7 +430,7 @@ onMounted(() => {
 }
 
 /* ============================================
-   VIDEO / PREVIEW (más chico y premium)
+   VIDEO / PREVIEW
 =============================================== */
 .preview-frame{
   width: 100%;
@@ -457,7 +447,6 @@ onMounted(() => {
     margin-bottom: -5%;
 }
 
-/* Video */
 .preview-frame video{
   width:100%;
   height:100%;
@@ -465,7 +454,6 @@ onMounted(() => {
   filter: brightness(.88) contrast(1.1) saturate(1.05);
 }
 
-/* Marco LED */
 .preview-led{
   position:absolute;
   inset: 0;
@@ -477,7 +465,6 @@ onMounted(() => {
     0 0 90px rgba(244,200,121,.25);
 }
 
-/* Glass layer */
 .preview-glass{
   position:absolute;
   inset:0;
@@ -488,7 +475,6 @@ onMounted(() => {
   opacity:.55;
 }
 
-/* Sutil respiración */
 .preview-frame{
   animation: frameBreath 7s ease-in-out infinite;
 }
@@ -498,7 +484,6 @@ onMounted(() => {
   50%{ box-shadow:0 70px 160px rgba(0,0,0,.95) }
   100%{ box-shadow:0 60px 140px rgba(0,0,0,.9) }
 }
-
 
 /* ============================================
    RESPONSIVE
@@ -513,7 +498,6 @@ onMounted(() => {
     gap: 2.2rem;
   }
 
-  /* ✅ Panel arriba, video abajo */
   .texturas-panel { order: 0; }
   .texturas-preview { order: 1; }
 
@@ -542,7 +526,6 @@ onMounted(() => {
     margin: 0 auto;
   }
 }
-
 
 @media (max-width: 520px) {
     .texturas-swatches-grid {

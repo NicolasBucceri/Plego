@@ -48,7 +48,7 @@ onMounted(() => {
     ([entry]) => {
       if (entry.isIntersecting) {
         isVisible.value = true
-        observer.disconnect() // anima solo una vez
+        observer.disconnect()
       }
     },
     {
@@ -72,7 +72,6 @@ onBeforeUnmount(() => {
   padding: 6rem 0 5rem;
   background: #111;
   color: #f5f5f5;
-  /* 👇 Sin animación acá: el fondo queda fijo */
 }
 
 .container {
@@ -89,7 +88,6 @@ onBeforeUnmount(() => {
   align-items: center;
 }
 
-/* Animaciones internas (stagger) */
 .nosotros-card,
 .nosotros-media {
   opacity: 0;
@@ -158,12 +156,10 @@ onBeforeUnmount(() => {
   width: 100%;
   height: 100%;
   object-fit: contain;
-  /* video completo, sin recorte */
   display: block;
   filter: brightness(0.95) contrast(1.05);
 }
 
-/* Marco interior */
 .nosotros-media::after {
   content: '';
   position: absolute;
