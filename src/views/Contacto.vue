@@ -215,7 +215,7 @@
 import { computed, onMounted, onBeforeUnmount, reactive, ref } from "vue";
 
 const CONTACT = reactive({
-    whatsapp: "+54 11 5579-8761",
+    whatsapp: "+54 9 11 3562-6449",
     instagram: "https://www.instagram.com/plegoamoblamientos/",
     instagramLabel: "plegoamoblamientos",
     tiktok: "https://www.tiktok.com/@plegoamoblamiento?_r=1&_t=ZM-92dFHBoWOTb",

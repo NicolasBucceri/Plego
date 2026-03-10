@@ -84,7 +84,7 @@ const texturas = [
 
 const texturaSeleccionada = ref(texturas[0].id)
 
-const whatsappNumber = "5491155798761"
+const whatsappNumber = "5491135626449"
 
 const goToWhatsApp = () => {
     const base = `https://wa.me/${whatsappNumber}`

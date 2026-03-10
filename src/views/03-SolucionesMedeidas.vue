@@ -78,7 +78,7 @@ export default {
   data() {
     return {
       hoverTarget: null,
-      whatsappNumber: "5491155798761",
+      whatsappNumber: "5491135626449",
       hasAnimated: false,
     };
   },

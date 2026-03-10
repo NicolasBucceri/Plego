@@ -35,12 +35,12 @@
 
                 <div class="c-item">
                     <i class="fa-solid fa-phone"></i>
-                    <span>+54 11 5579-8761</span>
+                    <span>+54 9 11 3562-6449</span>
                 </div>
 
                 <div class="c-item">
                     <i class="fa-brands fa-whatsapp"></i>
-                    <span>+54 9 11 5579-8761</span>
+                    <span>+54 9 11 3562-6449</span>
                 </div>
 
                 <div class="socials">

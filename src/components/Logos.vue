@@ -17,7 +17,7 @@
 <script setup>
 import { computed } from "vue"
 
-const whatsappNumber = "5491155798761"
+const whatsappNumber = "5491135626449"
 const instagramUser = "nicolasbucceri.dev"
 
 const waMessage =
